@@ -45,7 +45,7 @@ Create a folder: cars. Inside it: mercedes, bmw, scratch and upload images
 
 <img src="readme-img/console.png"/>
 
-Example: 
+Example Viktoria: 
 
 ```aws s3 sync . s3://mybucket```
 
