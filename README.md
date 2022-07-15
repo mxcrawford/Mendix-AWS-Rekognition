@@ -19,6 +19,8 @@ Gain free hands on experience with AWS here: [Sign Up](https://aws.amazon.com/fr
       - [Use Model](#use-model)
   - [Mendix Setup](#mendix-setup)
     - [Launch windows EC2 Instance with Mendix Studio Pro Installed](#launch-windows-ec2-instance-with-mendix-studio-pro-installed)
+    - [Download release from this repo](#download-release-from-this-repo)
+  - [Setup your project](#setup-your-project)
   - [The Mendix Build](#the-mendix-build)
     - [Creating your AWS Keys](#creating-your-aws-keys)
     - [Setting your AWS Access and Secret Keys in Mendix](#setting-your-aws-access-and-secret-keys-in-mendix)
@@ -169,9 +171,31 @@ We will be using Mendix Studio Pro to develop our app, which requires a Windows 
 
 We have published a Cloudformation Template that you can easily launch which is an EC2 Instance with an AMI that contains Mendix Studio Pro already installed
 
-[<img src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png">](https://console.aws.amazon.com/cloudformation/home?region=eu-central-1#/stacks/new?stackName=MendixStudioPro-Windows&templateURL=https://mendix-aws.s3.eu-central-1.amazonaws.com/windows_mendix_1.json)
+[<img src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png">](https://console.aws.amazon.com/cloudformation/home?region=eu-central-1#/stacks/new?stackName=MendixStudioPro-Windows&templateURL=https://mendix-aws.s3.eu-central-1.amazonaws.com/windows_mendix.json)
 
+<img src="readme-img/cf1.png">
 
+<img src="readme-img/cf2.png">
+
+### Download release from this repo
+
+Once you have your Windows OS setup, download the latest release from this github repo, you will then have the starter Mendix App that you will be working in
+
+<img src="readme-img/cf4.png">
+
+## Setup your project
+
+Once you have the ```Mendix_AWS_Rekognition.mpk``` package downloaded, open Mendix Studio Pro from the Desktop
+
+Sign in with the account details you setup signing up for Mendix
+
+Import the Project package in order to create your own project
+
+<img src="readme-img/import1.png">
+
+Next, select your choice of version control and location of your project - for this exercise it is recommended to use SVN which Mendix uses in the developer portal
+
+The project will now be created and uploaded to the repository
 
 ## The Mendix Build
 
