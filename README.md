@@ -7,21 +7,24 @@ You can signup for a free Mendix account for free here: [Sign Up for Free](https
 
 Gain free hands on experience with AWS here: [Sign Up](https://aws.amazon.com/free/?all-free-tier&all-free-tier.sort-by=item.additionalFields.SortRank&all-free-tier.sort-order=asc&awsf.Free%20Tier%20Types=*all&awsf.Free%20Tier%20Categories=*all)
 
-- [The AWS Build](#aws-build)
+- [Mendix AWS Rekoginition Template](#mendix-aws-rekoginition-template)
+  - [AWS Build](#aws-build)
     - [AWS S3 Dataset](#aws-s3-dataset)
     - [Rekognition Training](#rekognition-training)
-        - [Create a project](#create-a-project-console)
-        - [Create a dataset](#create-dataset)
-        - [Label Images](#label-images)
-        - [Train Model](#train-model)
-        - [Evaluate](#evaluate)
-        - [Use Model](#use-model)
-- [The Mendix Build](#the-mendix-build)
+      - [Create a project (console)](#create-a-project-console)
+      - [Create Dataset](#create-dataset)
+      - [Label Images](#label-images)
+      - [Train Model](#train-model)
+      - [Evaluate](#evaluate)
+      - [Use Model](#use-model)
+  - [Mendix Setup](#mendix-setup)
+    - [Launch windows EC2 Instance with Mendix Studio Pro Installed](#launch-windows-ec2-instance-with-mendix-studio-pro-installed)
+  - [The Mendix Build](#the-mendix-build)
     - [Creating your AWS Keys](#creating-your-aws-keys)
-    - [Setting your AWS Keys in Mendix](#setting-your-aws-access-and-secret-keys-in-mendix)
-    - [Setting your Rekognition Settings](#setting-up-the-rekognition-constants)
+    - [Setting your AWS Access and Secret Keys in Mendix](#setting-your-aws-access-and-secret-keys-in-mendix)
+    - [Setting up the Rekognition constants](#setting-up-the-rekognition-constants)
     - [Building the domain model](#building-the-domain-model)
-    - [Building the User interface](#building-the-user-interface)
+    - [Building the User Interface](#building-the-user-interface)
     - [Building the logic](#building-the-logic)
 
 ## AWS Build
@@ -157,6 +160,17 @@ After your model is trained, Amazon Rekognition Custom Labels provides the follo
 ```aws rekognition detect-custom-labels --project-version-arn "your model arn" --image "S3Object={Bucket=mendixcars, Name=car2.jpg}" --region us-west-2```
 
 Replace the information in yellow with details of your model and a bucket containing new images for analysis.
+
+## Mendix Setup
+
+We will be using Mendix Studio Pro to develop our app, which requires a Windows Operating system. If you don't have Windows installed, follow the below instructions
+
+### Launch windows EC2 Instance with Mendix Studio Pro Installed
+
+We have published a Cloudformation Template that you can easily launch which is an EC2 Instance with an AMI that contains Mendix Studio Pro already installed
+
+[<img src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png">](https://console.aws.amazon.com/cloudformation/home?region=eu-central-1#/stacks/new?stackName=MendixStudioPro-Windows&templateURL=https://mendix-aws.s3.eu-central-1.amazonaws.com/windows_mendix_1.json)
+
 
 
 ## The Mendix Build
