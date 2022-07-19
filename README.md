@@ -41,18 +41,16 @@ The Create bucket wizard opens.
 4.	In Region, choose the AWS Region where you want the bucket to reside.
 Choose a Region close to you to minimize latency and costs and address regulatory requirements.
 5.	Leave other settings as default, scroll down and click Create bucket button.
-6.	Select a new bucket and create folders in the bucket by clicking Create folder button.
-Create a folder: cars. Inside it: mercedes, bmw, scratch and upload images
+6.	Select a new bucket. You can and create folders in the bucket by clicking **Create folder** button and manually upload pictures by used drag and drop.
+Alternatively you can use AWS CLI to sync files with your local drive.
 
 <img src="readme-img/s3-bucket.png"/>
 
-7. Depending on the number of images you can install AWS CLI and use S3 sync command.
-
-<img src="readme-img/console.png"/>
-
-Example Viktoria: 
+7. If you decide to use AWS CLI, make sure you configire credentials by following instructuins outlined in the [AWS documentation](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html). After you configured AWS CLI then use S3 sync command:
 
 ```aws s3 sync . s3://mybucket```
+
+<img src="readme-img/console.png"/>
 
 You can find the image dataset that we used for the webinar inside this repo here: [Cars Folder](/rekognition-dataset)
 
@@ -79,12 +77,12 @@ In this example, we will train to analyze car makers and damages.
 #### Create Dataset
 
 1.	Choose Create dataset. The Create dataset page is shown.
-2.	In Starting configuration, choose either Start with a single dataset 
+2.	In Starting configuration, choose **Start with a single dataset**
 
 <img src="readme-img/rekognition-dataset.png">
 
 3.	Choose Import images from Amazon S3 bucket.
-4.	In S3 URI, enter the Amazon S3 bucket location and folder path. Select a parent “cars” folder that contains folders: bmw, mercedes, scratch and click Copy S3 URI.
+4.	In S3 URI, enter the Amazon S3 bucket location and folder path. Select a parent “cars” folder that contains folders: bmw, mercedes, lamborghini and click Copy S3 URI.
 
 <img src="readme-img/rekognition-objects.png">
 
@@ -103,27 +101,15 @@ In this example, we will train to analyze car makers and damages.
 
 <img src="readme-img/rekognition-permissions2.png">
 
-9.	Go back to Rekognition configuration, click “Create Dataset” in Rekognition console. Depending on the number of images, it might take a few minutes to create a dataset.
+9.	Go back to Rekognition configuration, click **Create Dataset** in Rekognition console. Depending on the number of images, it might take a few minutes to create a dataset.
 
 #### Label Images
-1.	Choose Start labeling to enter labeling mode. Select a first label. 
-Note: Do car models first (bmw, mercedes) and then do defects (scratches).
-2.	In the image gallery, select one or more images that you want to add labels to. You can only select images on a single page at a time. To select a contiguous range of images on a page:
-3.	Select the first image in the range.
-4.	Press and hold the shift key.
-5.	Select the last image range. The images between the first and second image are also selected.
-6.	Release the shift key.
-7.	Choose Assign Labels.
+1.	You can review images in the dataset and validate automatically assigned labels.
+2.	In the image gallery, select on the left pane **Labeled** and use check boxes to review images of cars.
 
-<img src="readme-img/rekognition-labelling.png">
+<img src="readme-img/rekognition-labelling1.png">
 
-8. Click Draw bounding boxes and mark scratches as well as cars on the images
 
-<img src="readme-img/rekognition-labelling2.png">
-
-9.	Repeat labeling until every image is annotated with the required labels. 
-10.	Choose Save changes to save your changes.
-11.	Choose Exit to exit labeling mode.
 
 #### Train Model
 1.  On the Project page, choose Train model.
@@ -131,7 +117,7 @@ Note: Do car models first (bmw, mercedes) and then do defects (scratches).
 <img src="readme-img/rekognition-train-model.png">
 
 2.  Keep default settings and click Train model. Depending on a number of images it will take from 30 minutes to 24 hours. 
-Note: 200 images took about 40 minutes.
+Note: 200 images takes about 40 minutes.
 
 <img src="readme-img/rekognition-train-confirmation.png">
 
