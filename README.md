@@ -134,7 +134,6 @@ After your model is trained, Amazon Rekognition Custom Labels provides the follo
 
 <img src="readme-img/rekognition-evaluate-2.png">
 
-<img src="readme-img/rekognition-evaluate-3.png">
 
 #### Use Model
 1.	In the Start or stop model section select the number of inference units that you want to use. For more information, see [Running a trained Amazon Rekognition Custom Labels model](https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/running-model.html).
@@ -145,7 +144,7 @@ After your model is trained, Amazon Rekognition Custom Labels provides the follo
 
 4. You can test your model using AWS CLI command.
 
-```aws rekognition detect-custom-labels --project-version-arn "your model arn" --image "S3Object={Bucket=mendixcars, Name=car2.jpg}" --region us-west-2```
+```aws rekognition detect-custom-labels --project-version-arn "your model arn" --image "S3Object={Bucket=mendixcars, Name=car.jpg}" --region us-west-2```
 
 Replace the information in yellow with details of your model and a bucket containing new images for analysis.
 
