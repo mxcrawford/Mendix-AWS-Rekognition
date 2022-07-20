@@ -167,7 +167,9 @@ We have published a Cloudformation Template that you can easily launch which is 
 
 Once you have your Windows OS setup, download the latest release from this github repo, you will then have the starter Mendix App that you will be working in
 
-<img src="readme-img/cf4.png">
+[Download MPK](https://github.com/mxcrawford/Mendix-AWS-Rekognition/releases/tag/v1.0)
+
+<a href="https://github.com/mxcrawford/Mendix-AWS-Rekognition/releases/tag/v1.0"><img src="readme-img/cf4.png"></a>
 
 ## Setup your project
 
