@@ -343,7 +343,7 @@ To perform the logic needed we'll create a Nanoflow which will open up the camer
 <img src="readme-img/mx-build-logic-take-picture.jpg"/>
 
 7. Configure the parameters as follows:
-    - Picture = NewPicture
+    - Picture = $Picture
     - Show Confirmation Screen = false
     - Picture Quality = low
     - Maximum width = empty
@@ -358,7 +358,7 @@ To perform the logic needed we'll create a Nanoflow which will open up the camer
     - MinConfidence = 0
     - AWS_Region = your region
 
-<img src="readme-img/mx-build-logic-rekognition.jpg"/>
+<img src="readme-img/mx-build-logic-Rekognition.jpg"/>
 
 9. Add a Loop activity to the microflow and connect it to the CustomLabel List
 
