@@ -391,8 +391,9 @@ To perform the logic needed we'll create a Nanoflow which will open up the camer
 
 <img src="readme-img/mx-build-logic-bounding-box.jpg"/>
 
-16. We're now complete so we need to run the project locally. Click the Green play Icon on the top right.
+16. We're now complete so we need to run the project in the cloud. Click the 'Publish' button on the top right.
 
-<img src="readme-img/mx-build-run-app.jpg"/>
+<img src="readme-img/mx-build-publish-app.jpg"/>
 
-17. Open up your app locally on your laptop by going to http://localhost:8080. If you wish to try it on your phone you'll need to create a secure tunnel using something like [ngrok](https://ngrok.com/) to ensure that the camera on your phone can be accessed. Mobile browsers only allow you to access the camera over a secure connection using https. 
+17. You'll then see a message informing you that the deployment is in process
+<img src="readme-img/mx-build-publish-app-inprogress.jpg"/>
