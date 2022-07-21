@@ -134,7 +134,6 @@ After your model is trained, Amazon Rekognition Custom Labels provides the follo
 
 <img src="readme-img/rekognition-evaluate-2.png">
 
-<img src="readme-img/rekognition-evaluate-3.png">
 
 #### Use Model
 1.	In the Start or stop model section select the number of inference units that you want to use. For more information, see [Running a trained Amazon Rekognition Custom Labels model](https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/running-model.html).
@@ -145,7 +144,7 @@ After your model is trained, Amazon Rekognition Custom Labels provides the follo
 
 4. You can test your model using AWS CLI command.
 
-```aws rekognition detect-custom-labels --project-version-arn "your model arn" --image "S3Object={Bucket=mendixcars, Name=car2.jpg}" --region us-west-2```
+```aws rekognition detect-custom-labels --project-version-arn "your model arn" --image "S3Object={Bucket=mendixcars, Name=car.jpg}" --region us-west-2```
 
 Replace the information in yellow with details of your model and a bucket containing new images for analysis.
 
@@ -344,7 +343,7 @@ To perform the logic needed we'll create a Nanoflow which will open up the camer
 <img src="readme-img/mx-build-logic-take-picture.jpg"/>
 
 7. Configure the parameters as follows:
-    - Picture = NewPicture
+    - Picture = $Picture
     - Show Confirmation Screen = false
     - Picture Quality = low
     - Maximum width = empty
@@ -359,7 +358,7 @@ To perform the logic needed we'll create a Nanoflow which will open up the camer
     - MinConfidence = 0
     - AWS_Region = your region
 
-<img src="readme-img/mx-build-logic-rekognition.jpg"/>
+<img src="readme-img/mx-build-logic-Rekognition.jpg"/>
 
 9. Add a Loop activity to the microflow and connect it to the CustomLabel List
 
@@ -396,4 +395,17 @@ To perform the logic needed we'll create a Nanoflow which will open up the camer
 <img src="readme-img/mx-build-publish-app.jpg"/>
 
 17. You'll then see a message informing you that the deployment is in process
+
 <img src="readme-img/mx-build-publish-app-inprogress.jpg"/>
+
+18. Click the dropdown near the view app and select view on device.
+
+<img src="readme-img/mx-build-run-view-on-device.jpg"/>
+
+19. A QR code will be generated and displayed. Scan this with your mobile phone.
+
+<img src="readme-img/mx-build-run-qrcode.jpg"/>
+
+20. Use your newly built app!
+
+<img src="readme-img/end-result.jpg"/>
