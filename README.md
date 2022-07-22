@@ -1,37 +1,42 @@
 # Mendix AWS Rekoginition Template
-Welcome to the Mendix AWS Rekognition template. This template has been designed to help you get started with using Mendix and AWS Rekognition. It contains all the required modules to make it easy for you to build an app connected to AWS Rekognition. Once built the app will allow you to take a photo on your mobile phone or laptop, upload it to AWS Rekognition, and view the results of the Rekognition analysis. The template contains a start and complete module so that you can either decide to use the final solution or build your way up to the solution.
+
+Welcome to the Mendix AWS Rekognition workshop! 
+
+This workshop has been designed to help you get started with using Mendix and AWS Rekognition. It contains all the required modules to make it easy for you to build an app connected to AWS Rekognition. Once built the app will allow you to take a photo on your mobile phone or laptop, upload it to AWS Rekognition, and view the results of the Rekognition analysis. The template contains a start and complete module so that you can either decide to use the final solution or build your way up to the solution.
 
 <b>This template already assumes that you have some knowledge of AWS, a AWS account, and a Mendix account</b>
 
 You can signup for a free Mendix account for free here: [Sign Up for Free](https://signup.mendix.com/link/signup/?source=none&medium=aws-demo)
 
-Gain free hands on experience with AWS here: [Sign Up](https://aws.amazon.com/free/?all-free-tier&all-free-tier.sort-by=item.additionalFields.SortRank&all-free-tier.sort-order=asc&awsf.Free%20Tier%20Types=*all&awsf.Free%20Tier%20Categories=*all)
+You can open an AWS Account and access AWS Free Tier Offers: [Learn more and Create a Free Account](https://aws.amazon.com/free/?all-free-tier&all-free-tier.sort-by=item.additionalFields.SortRank&all-free-tier.sort-order=asc&awsf.Free%20Tier%20Types=*all&awsf.Free%20Tier%20Categories=*all)
+
+# Workshop Outline:
 
 - [Mendix AWS Rekoginition Template](#mendix-aws-rekoginition-template)
   - [AWS Build](#aws-build)
-    - [AWS S3 Dataset](#aws-s3-dataset)
-    - [Rekognition Training](#rekognition-training)
-      - [Create a project (console)](#create-a-project-console)
+    - [Amazon S3 Dataset](#aws-s3-dataset)
+    - [Amazon Rekognition](#rekognition-training)
+      - [Create Project (console)](#create-a-project-console)
       - [Create Dataset](#create-dataset)
       - [Label Images](#label-images)
       - [Train Model](#train-model)
       - [Evaluate](#evaluate)
       - [Use Model](#use-model)
   - [Mendix Setup](#mendix-setup)
-    - [Launch windows EC2 Instance with Mendix Studio Pro Installed](#launch-windows-ec2-instance-with-mendix-studio-pro-installed)
+    - [Launch Windows EC2 Instance with Mendix Studio Pro Installed](#launch-windows-ec2-instance-with-mendix-studio-pro-installed)
     - [Download release from this repo](#download-release-from-this-repo)
   - [Setup your project](#setup-your-project)
   - [The Mendix Build](#the-mendix-build)
     - [Creating your AWS Keys](#creating-your-aws-keys)
     - [Setting your AWS Access and Secret Keys in Mendix](#setting-your-aws-access-and-secret-keys-in-mendix)
-    - [Setting up the Rekognition constants](#setting-up-the-rekognition-constants)
-    - [Building the domain model](#building-the-domain-model)
+    - [Setting up the Amazon Rekognition constants](#setting-up-the-rekognition-constants)
+    - [Building the Domain Model](#building-the-domain-model)
     - [Building the User Interface](#building-the-user-interface)
     - [Building the logic](#building-the-logic)
 
 ## AWS Build
 
-### AWS S3 Dataset
+### Amazon S3 Dataset
 The image dataset used in the webinar is available here: [Cars Folder](/rekognition-dataset/)
 
 1.	Sign in to the AWS Management Console and open the Amazon S3 console at https://console.aws.amazon.com/s3/.
@@ -182,6 +187,7 @@ To open up your EC2 Instance first open up EC2 from the AWS Console. Click on In
 Click on connect in the top right of the instance overview.
 
 Click on the option RDP.
+
 <img src="readme-img/connect-via-rdp.png"/>
 
 Download the remote desktop file.
