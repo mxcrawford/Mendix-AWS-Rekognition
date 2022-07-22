@@ -27,12 +27,12 @@ You can open an AWS Account and access AWS Free Tier Offers: [Learn more and Cre
     - [Download release from this repo](#download-release-from-this-repo)
   - [Setup your project](#setup-your-project)
   - [The Mendix Build](#the-mendix-build)
-    - [Creating your AWS Keys](#creating-your-aws-keys)
-    - [Setting your AWS Access and Secret Keys in Mendix](#setting-your-aws-access-and-secret-keys-in-mendix)
-    - [Setting up the Amazon Rekognition constants](#setting-up-the-rekognition-constants)
-    - [Building the Domain Model](#building-the-domain-model)
-    - [Building the User Interface](#building-the-user-interface)
-    - [Building the logic](#building-the-logic)
+    - [Create your AWS Keys](#creating-your-aws-keys)
+    - [Set your AWS Access and Secret Keys in Mendix](#setting-your-aws-access-and-secret-keys-in-mendix)
+    - [Set up the Amazon Rekognition constants](#setting-up-the-rekognition-constants)
+    - [Build the Domain Model](#building-the-domain-model)
+    - [Build the User Interface](#building-the-user-interface)
+    - [Build the logic](#building-the-logic)
 
 ## AWS Build
 
@@ -42,24 +42,24 @@ The image dataset used in the webinar is available here: [Cars Folder](/rekognit
 1.	Sign in to the AWS Management Console and open the Amazon S3 console at https://console.aws.amazon.com/s3/.
 2.	Choose Create bucket.
 The Create bucket wizard opens.
-3.	In Bucket name, enter a DNS-compliant name for your bucket. For example “mendixcars-yourname”
+3.	In Bucket name, enter a DNS-compliant name for your bucket. For example *mendixcars-yourname*
 4.	In Region, choose the AWS Region where you want the bucket to reside.
 Choose a Region close to you to minimize latency and costs and address regulatory requirements.
-5.	Leave other settings as default, scroll down and click Create bucket button.
+5.	Leave other settings as default, scroll down and click **Create bucket** button.
 6.	Select a new bucket. You can and create folders in the bucket by clicking **Create folder** button and manually upload pictures by used drag and drop.
 Alternatively you can use AWS CLI to sync files with your local drive.
 
 <img src="readme-img/s3-bucket.png"/>
 
-7. If you decide to use AWS CLI, make sure you configire credentials by following instructuins outlined in the [AWS documentation](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html). After you configured AWS CLI then use S3 sync command:
+7. If you decide to use AWS CLI, make sure you configire credentials by following instructuins outlined in the [AWS documentation](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html). After you configured AWS CLI then navigate to the folder that contains *cars* folder and use S3 sync command:
 
 ```aws s3 sync . s3://mybucket```
 
 <img src="readme-img/console.png"/>
 
-You can find the image dataset that we used for the webinar inside this repo here: [Cars Folder](/rekognition-dataset)
+You can find and download the image dataset from here: [Cars Folder](/rekognition-dataset)
 
-### Rekognition Training
+### Amazon Rekognition
 <img src="readme-img/rekognition-steps.png"/>
 
 With Amazon Rekognition Custom Labels, you can identify the objects and scenes in images that are specific to your business needs. For example, you can find your logo in social media posts, identify your products on store shelves, classify machine parts in an assembly line, distinguish healthy and infected plants, or detect animated characters in videos.
@@ -70,24 +70,24 @@ Rekognition Custom Labels builds off of Rekognition’s existing capabilities, w
 
 In this example, we will train to analyze car makers and damages.
 
-#### Create a project (console)
+#### Create Project (console)
 1.	Sign in to the AWS Management Console and open the Amazon Rekognition console at https://console.aws.amazon.com/rekognition/
-2.	In the left pane, choose Use Custom Labels. The Amazon Rekognition Custom Labels landing page is shown.
-3.	The Amazon Rekognition Custom Labels landing page, choose to Get started. In the left pane, Choose Projects. 
+2.	In the left pane, choose **Use Custom Labels**. The Amazon Rekognition Custom Labels landing page is shown.
+3.	The Amazon Rekognition Custom Labels landing page, choose to **Get started**. In the left pane, **Choose Projects**. 
 4.	Choose a Region close to you to minimize latency and costs and address regulatory requirements.
-5.	Choose Create Project.
-6.	In Project name, enter a name for your project. For example “mendixcars”
-7.	Choose Create project to create your project.
+5.	Choose **Create Project**.
+6.	In Project name, enter a name for your project. For example *mendixcars*
+7.	Choose **Create project** to create your project.
 
 #### Create Dataset
 
-1.	Choose Create dataset. The Create dataset page is shown.
+1.	Choose **Create dataset**. The Create dataset page is shown.
 2.	In Starting configuration, choose **Start with a single dataset**
 
 <img src="readme-img/rekognition-dataset.png">
 
 3.	Choose Import images from Amazon S3 bucket.
-4.	In S3 URI, enter the Amazon S3 bucket location and folder path. Select a parent “cars” folder that contains folders: bmw, mercedes, lamborghini and click Copy S3 URI.
+4.	In S3 URI, enter the Amazon S3 bucket location and folder path. Select a parent *cars* folder that contains folders: *bmw, mercedes, lamborghini* and click Copy S3 URI.
 
 <img src="readme-img/rekognition-objects.png">
 
@@ -106,7 +106,7 @@ In this example, we will train to analyze car makers and damages.
 
 <img src="readme-img/rekognition-permissions2.png">
 
-9.	Go back to Rekognition configuration, click **Create Dataset** in Rekognition console. Depending on the number of images, it might take a few minutes to create a dataset.
+9.	Go back to Amazon Rekognition configuration, click **Create Dataset** in Rekognition console. Depending on the number of images, it might take a few minutes to create a dataset.
 
 #### Label Images
 1.	You can review images in the dataset and validate automatically assigned labels.
@@ -117,11 +117,11 @@ In this example, we will train to analyze car makers and damages.
 
 
 #### Train Model
-1.  On the Project page, choose Train model.
+1.  On the Project page, choose **Train model**.
 
 <img src="readme-img/rekognition-train-model.png">
 
-2.  Keep default settings and click Train model. Depending on a number of images it will take from 30 minutes to 24 hours. 
+2.  Keep default settings and click **Train model**. Depending on a number of images it will take from 30 minutes to 24 hours. 
 Note: 200 images takes about 40 minutes.
 
 <img src="readme-img/rekognition-train-confirmation.png">
@@ -142,7 +142,7 @@ After your model is trained, Amazon Rekognition Custom Labels provides the follo
 
 #### Use Model
 1.	In the Start or stop model section select the number of inference units that you want to use. For more information, see [Running a trained Amazon Rekognition Custom Labels model](https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/running-model.html).
-2.	Choose Start. In the Start model dialog box, choose Start.
+2.	Choose **Start**. In the Start model dialog box, choose **Start**.
 3.	In the Model section, check the status of the model. When the model status is RUNNING, you can use the model to analyze images. 
 
 <img src="readme-img/rekognition-use-model.png">
@@ -151,7 +151,7 @@ After your model is trained, Amazon Rekognition Custom Labels provides the follo
 
 ```aws rekognition detect-custom-labels --project-version-arn "your model arn" --image "S3Object={Bucket=mendixcars, Name=car.jpg}" --region us-west-2```
 
-Replace the information in yellow with details of your model and a bucket containing new images for analysis.
+5. Replace the information in yellow with details of your model and a bucket containing new images for analysis.
 
 ## Mendix Setup
 
@@ -159,28 +159,28 @@ We will be using Mendix Studio Pro to develop our app, which requires a Windows 
 
 ### Launch windows EC2 Instance with Mendix Studio Pro Installed
 
-We have published a Cloudformation Template that you can easily launch which is an EC2 Instance with an AMI that contains Mendix Studio Pro already installed.
+1. We have published a Cloudformation Template that you can easily launch which is an EC2 Instance with an AMI that contains Mendix Studio Pro already installed.
 
 [<img src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png">](https://console.aws.amazon.com/cloudformation/home?region=eu-central-1#/stacks/new?stackName=MendixStudioPro-Windows&templateURL=https://mendix-aws.s3.eu-central-1.amazonaws.com/windows_mendix_v2.json)
 
-In order for the Cloudformation process to work you first need to create a EC2 Keypair. This can be created by searching for EC2 in the AWS Console, clicking on keypairs and creating a new one.
+2. In order for the Cloudformation process to work you first need to create a EC2 Keypair. This can be created by searching for EC2 in the AWS Console, clicking on keypairs and creating a new one.
 
 <img src="readme-img/create-keypair.png">
 
-When you have the Key pair dialog box open give it a name and select the PEM option.
+3. When you have the Key pair dialog box open give it a name and select the PEM option.
 
 <img src="readme-img/keypair-pem.png"/>
 
-Click create key pair, which will generate you a key in PEM format and download to your computer. You will need this key pair to successfully run the Cloud Formation process.
+4. Click create key pair, which will generate you a key in PEM format and download to your computer. You will need this key pair to successfully run the Cloud Formation process.
 
 
-When going through the cloudformation steps make sure that you select your keypair under the keyname option.
+5. In the cloudformation steps select the newly created keypair under the keyname option.
 
 <img src="readme-img/cf-step.png"/>
 
-Use the default values for all the other steps during the cloud formation process. Once your cloudformation script has complete you'll have a new EC2 instance provisioned with everything you need to build your Mendix app.
+6. Use the default values for all the other steps during the cloud formation process. Once your cloudformation script has complete you'll have a new EC2 instance provisioned with everything you need to build your Mendix app.
 
-To open up your EC2 Instance first open up EC2 from the AWS Console. Click on Instances, find your newly created instance, and click on the instance id.
+7. Open your EC2 Instance first open up EC2 from the AWS Console. Click on Instances, find your newly created instance, and click on the instance id.
 
 <img src="readme-img/running-instance.png"/>
 
