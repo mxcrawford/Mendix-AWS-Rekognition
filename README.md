@@ -154,13 +154,49 @@ We will be using Mendix Studio Pro to develop our app, which requires a Windows 
 
 ### Launch windows EC2 Instance with Mendix Studio Pro Installed
 
-We have published a Cloudformation Template that you can easily launch which is an EC2 Instance with an AMI that contains Mendix Studio Pro already installed
+We have published a Cloudformation Template that you can easily launch which is an EC2 Instance with an AMI that contains Mendix Studio Pro already installed.
 
 [<img src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png">](https://console.aws.amazon.com/cloudformation/home?region=eu-central-1#/stacks/new?stackName=MendixStudioPro-Windows&templateURL=https://mendix-aws.s3.eu-central-1.amazonaws.com/windows_mendix_v2.json)
 
-<img src="readme-img/cf1.png">
+In order for the Cloudformation process to work you first need to create a EC2 Keypair. This can be created by searching for EC2 in the AWS Console, clicking on keypairs and creating a new one.
 
-<img src="readme-img/cf2.png">
+<img src="readme-img/create-keypair.png">
+
+When you have the Key pair dialog box open give it a name and select the PEM option.
+
+<img src="readme-img/keypair-pem.png"/>
+
+Click create key pair, which will generate you a key in PEM format and download to your computer. You will need this key pair to successfully run the Cloud Formation process.
+
+
+When going through the cloudformation steps make sure that you select your keypair under the keyname option.
+
+<img src="readme-img/cf-step.png"/>
+
+Use the default values for all the other steps during the cloud formation process. Once your cloudformation script has complete you'll have a new EC2 instance provisioned with everything you need to build your Mendix app.
+
+To open up your EC2 Instance first open up EC2 from the AWS Console. Click on Instances, find your newly created instance, and click on the instance id.
+
+<img src="readme-img/running-instance.png"/>
+
+Click on connect in the top right of the instance overview.
+
+Click on the option RDP.
+<img src="readme-img/connect-via-rdp.png"/>
+
+Download the remote desktop file.
+
+Next Click on get password. This password you will need to login via RDP to the windows desktop.
+
+<img src="readme-img/get-windows-password.png"/>
+
+Upload your pem key pair file that you created earlier and hit 'Decrypt Password'. You'll see that this dialog will close and your password will appear on the previous page. Copy the password.
+
+Run the RDP file that you downloaded earlier and paste the password into the dialog when prompted.
+
+You should now see your windows desktop with Mendix installed. 
+
+<img src="readme-img/cf2.png"/>
 
 ### Download release from this repo
 
