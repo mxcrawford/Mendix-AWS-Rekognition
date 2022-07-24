@@ -51,13 +51,29 @@ Alternatively you can use AWS CLI to sync files with your local drive.
 
 <img src="readme-img/s3-bucket.png"/>
 
-7. If you decide to use AWS CLI, make sure you configire credentials by following instructuins outlined in the [AWS documentation](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html). After you configured AWS CLI then navigate to the folder that contains *cars* folder and use S3 sync command:
+7. If you decide to use AWS CLI, make sure you configire credentials by following instructuins outlined in the [AWS documentation](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html). 
+
+Note: AWS Config and role should have permission for Rekognition. Check an IAM User that is used in AWS CLI Config. Create a group in IAM such as *PerformActionToRekognition*. Attach **AmazonRekognitionFullAccess** policy to group. Add your IAM user to the newly created group.
+
+8. After you configured AWS CLI then navigate to the folder that contains *cars* folder and use S3 sync command:
 
 ```aws s3 sync . s3://mybucket```
 
 <img src="readme-img/console.png"/>
 
 You can find and download the image dataset from here: [Cars Folder](/rekognition-dataset)
+
+
+8. Open the [IAM console](/https://console.aws.amazon.com/iam/)
+9. In the navigation pane of the IAM console, choose **Roles**, and then choose **Create role**.
+10. For **Select trusted entity**, choose **AWS service**.
+11. From Use Case  search **Rekognition**. Use cases are defined by the service to include the trust policy required by the service. Then, choose **Next**.
+
+<img src="readme-img/iam-role-create.jpg"/>
+
+12. Give role name such as *Mendix_Rekog_To_S3*. Review information and click **Create role**.
+
+
 
 ### Amazon Rekognition
 <img src="readme-img/rekognition-steps.png"/>
@@ -100,13 +116,17 @@ In this example, we will train to analyze car makers and damages.
 
 <img src="readme-img/rekognition-policy.png">
 
-8.	On “Permissions” tab scroll down to “Bucket policy” and click edit and paste the policy. Click Save changes to save policy update.
+8.	On **Permissions** tab scroll down to **Bucket policy** and click edit and paste the policy. 
 
 <img src="readme-img/rekognition-permissions.png">
 
 <img src="readme-img/rekognition-permissions2.png">
 
-9.	Go back to Amazon Rekognition configuration, click **Create Dataset** in Rekognition console. Depending on the number of images, it might take a few minutes to create a dataset.
+9. Change the principal from *rekognition.amazonaws.com* service to the ARN of role created in Step 12 of previous section. Click Save changes to save policy update.
+
+<img src="readme-img/rekognition-role-update.jpg">
+
+10.	Go back to Amazon Rekognition configuration, click **Create Dataset** in Rekognition console. Depending on the number of images, it might take a few minutes to create a dataset.
 
 #### Label Images
 1.	You can review images in the dataset and validate automatically assigned labels.
@@ -180,25 +200,23 @@ We will be using Mendix Studio Pro to develop our app, which requires a Windows 
 
 6. Use the default values for all the other steps during the cloud formation process. Once your cloudformation script has complete you'll have a new EC2 instance provisioned with everything you need to build your Mendix app.
 
-7. Open your EC2 Instance first open up EC2 from the AWS Console. Click on Instances, find your newly created instance, and click on the instance id.
+7. Once the stack is created open EC2 from the AWS Console. Click on Instances, find your newly created instance, and click on the instance id.
 
 <img src="readme-img/running-instance.png"/>
 
-Click on connect in the top right of the instance overview.
-
-Click on the option RDP.
+8. Click on **Connect** in the top right of the instance overview. Select on the option **RDP client**.
 
 <img src="readme-img/connect-via-rdp.png"/>
 
-Download the remote desktop file.
+9. Download the remote desktop file.
 
-Next Click on get password. This password you will need to login via RDP to the windows desktop.
+10. Next Click on **Get password**. This password you will need to login via RDP to the windows desktop.
 
 <img src="readme-img/get-windows-password.png"/>
 
-Upload your pem key pair file that you created earlier and hit 'Decrypt Password'. You'll see that this dialog will close and your password will appear on the previous page. Copy the password.
+11. Upload your pem key pair file that you created earlier and hit **Decrypt Password**. You'll see that this dialog will close and your password will appear on the previous page. Copy the password.
 
-Run the RDP file that you downloaded earlier and paste the password into the dialog when prompted.
+12. Run the RDP file that you downloaded earlier and paste the password into the dialog when prompted.
 
 You should now see your windows desktop with Mendix installed. 
 
@@ -206,7 +224,7 @@ You should now see your windows desktop with Mendix installed.
 
 ### Download release from this repo
 
-Once you have your Windows OS setup, download the latest release from this github repo, you will then have the starter Mendix App that you will be working in
+1. Once you have your Windows OS setup, download the latest release from this github repo, you will then have the starter Mendix App that you will be working in
 
 [Download MPK](https://github.com/mxcrawford/Mendix-AWS-Rekognition/releases/tag/v1.0)
 
@@ -214,15 +232,15 @@ Once you have your Windows OS setup, download the latest release from this githu
 
 ## Setup your project
 
-Once you have the ```Mendix_AWS_Rekognition.mpk``` package downloaded, open Mendix Studio Pro from the Desktop
+1. Once you have the ```Mendix_AWS_Rekognition.mpk``` package downloaded, open Mendix Studio Pro from the Desktop.
 
-Sign in with the account details you setup signing up for Mendix
+2. Sign in with the account details you setup signing up for Mendix.
 
-Import the Project package in order to create your own project
+3. Import the Project package in order to create your own project
 
 <img src="readme-img/import1.png">
 
-Next, select your choice of version control and location of your project - for this exercise it is recommended to use SVN which Mendix uses in the developer portal
+4. Next, select your choice of version control and location of your project - for this exercise it is recommended to use SVN which Mendix uses in the developer portal
 
 The project will now be created and uploaded to the repository
 
@@ -238,8 +256,9 @@ To generate an AWS Access and Secret Key follow the steps below:
 
 ### Setting your AWS Access and Secret Keys in Mendix
 In order to authenticate with AWS services, it's important that requests are signed using an AWS access and secret key. In Mendix this is done using the Sig4 process. Inside this application, we have already included a module to help with this process.
-1. Create access and secret key pair on AWS with access to Rekognition service
-2. Copy each of the keys
+1. Create access and secret key pair on AWS with access to Rekognition service.
+
+2. Copy each of the keys.
 3. With the application open inside Studio Pro expand the Marketplace modules folder item in the app explorer.
 4. Then expand the AWS_Sig4 module.
 5. Finally, double click on the Access Key ID and Secret Key then paste the values into each.
