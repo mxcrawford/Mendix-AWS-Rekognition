@@ -283,106 +283,112 @@ Once you have these constants set up you're ready to begin your build.
 ### Building the domain model
 The first step with many Mendix projects is to start with building the data structure. Data is modeled in Mendix using domain models. Each Module in Mendix contains a domain model where you can model the entities, associations and attributes. Follow the below steps to build out the right structure. These instructions assume that you have already pre-installed Mendix Studio Pro 9.12.2+.
 
-1. Using the App Explorer on the left-hand side open up the module "MxRekognitionDemo_Start".
-2. Double click on the "Domain model" 
-3. Drag an entity from the Toolbox onto the Canvas. The toolbox can be often found on the right-hand side.
+1. Using the App Explorer on the left-hand side open up the module **MxRekognitionDemo_Start**.
+2. Double click on the **Domain model**. 
+3. Drag an **Entity** from the *Toolbox* onto the *Canvas*. The *Toolbox* can be often found on the right-hand side.
 
 <img src="readme-img/mx-build-entity.jpg"/>
 
-4. Double click on the Entity to open the dialog box.
-5. Change the name to Picture.
+4. Double click on the **Entity** to open the dialog box.
+5. Change the **Name** to *Picture*
 
 <img src="readme-img/mx-build-picture-entity.jpg"/>
 
-6. Click the "Select" button next to "Generalization".
-7. In the Search field type "Image".
+6. Click the **Select** button next to **Generalization**
+7. In the Search field type *Image*
 
 <img src="readme-img/mx-build-generalization.jpg"/>
 
-8. Double click on the Image entity.
-9. Click the "Ok" button to close the dialog.
-10. Drag another entity onto the workbench.
+8. Double click on the **Image** entity.
+9. Click the **OK** button at the bottom to close the dialog.
+10. Drag another **Entity** onto the workbench.
 
 <img src="readme-img/mx-build-label-entity.jpg"/>
 
-11. Double click on this entity and rename it to Label.
-12. Under the "Attributes" tab click the "New" button.
-13. Name your first attribute "Name".
-14. Click "Ok" to close the dialog.
-15. Add another Attribute and call this one "Confidence".
-16. Under the Data Type Dropdown select "Decimal".
+11. Double click on this **Entity** and rename it to *Label*
+12. Under the **Attributes** tab click the **New** button.
+13. Name your first attribute **Name**.
+14. Click **OK** to close the dialog.
+15. Add another Attribute and call this one **Confidence**.
+16. Under the Data Type Dropdown select **Decimal**.
 
 <img src="readme-img/mx-build-label-properties.jpg"/>
 
-17. Click "Ok" and then "Ok" to close both dialogs.
-18. Associate the two entities by dragging the arrow from Label to Picture. This will create a relationship between these two entities.
+17. Click **OK** and then **OK** to close both dialogs.
+18. Associate the two entities by dragging the arrow **from** *Label* **to** *Picture*. This will create a relationship between these two entities.
 
 <img src="readme-img/mx-build-label-associate.jpg"/>
 
 ### Building the User Interface
-1. Open up the folder "Pages" inside the "MxRekognitionDemo_Start" module.
-2. Double click on "Home_Start" to open up.
-3. From the right-hand side open up the "Toolbox" and then "Building Blocks".
+1. Open up the folder **Pages** inside the **MxRekognitionDemo_Start** module.
+2. Double click on **Home_Start** to open up.
+3. From the right-hand side open up the **Toolbox** and then select **Building Blocks** tab.
 
 <img src="readme-img/mx-build-page-build.jpg"/>
 
-4. Drag the Block labeled "Label Block" to the bottom empty space.
-5. Drag the other building block "Picture Block" to the space above.
+4. Search and Drag the Block labeled **Label Block** to the bottom empty space.
+5. Drag the other building block **Picture Block** to the space above.
 
 <img src="readme-img/mx-build-page-build-blocks.jpg"/>
 
-6. Next, we need to connect these up to our Picture object. Click on the widgets tab on the right-hand side.
-7. Drag on a "Data view" widget onto the page at the top.
+6. Next, we need to connect these up to our Picture object. Click on the **Widgets** tab on the right-hand side.
+7. Drag on a **Data view** widget onto the page at the top.
 
 <img src="readme-img/mx-build-page-dataview.jpg"/>
 
-8. Double click on the widget to open up the properties dialog.
-9. Under "Data source" select "Nanoflow". You can find more information on Nanoflows here: [Nanoflows](https://docs.mendix.com/refguide/nanoflows/)
-10. Click the "Select" button.
+8. Double click on the Date View widget to open up the properties dialog.
+9. Under **Data source** section, Select Type: **Nanoflow**. You can find more information on Nanoflows here: [Nanoflows](https://docs.mendix.com/refguide/nanoflows/)
+10. Click the **Select** button.
 
 <img src="readme-img/mx-build-page-datasource.jpg"/>
 
-11. Click the "New" button at the bottom of the popup.
-12. Give the Nanoflow a name like "DSO_NewPicture". You can find more information on naming conventions here: [Best practices](https://docs.mendix.com/howto/general/dev-best-practices/#341-entity-event-microflows)
+11. Click the **New** button at the bottom of the popup.
+12. Give the Nanoflow a name like *DSO_NewPicture*. You can find more information on naming conventions here: [Best practices](https://docs.mendix.com/howto/general/dev-best-practices/#341-entity-event-microflows)
 
 <img src="readme-img/mx-build-page-get-picture.jpg"/>
 
-13. Click the "Show" button to open up the nanoflow and close the dialog.
+13. Click the **Show** button to open up the nanoflow and close the dialog.
 
 <img src="readme-img/mx-build-page-nanoflow.jpg"/>
 
-14. Using the Toolbox drag on a "Create Object" action.
+14. Using the Toolbox drag on a **Create Object** action.
 
 <img src="readme-img/mx-build-page-create-action.jpg"/>
 
-15. Double click on the action and set the entity type to our new "Picture" entity.
+15. Double click on the action and set the entity type to our new **Picture** entity.
 
 <img src="readme-img/mx-build-page-select-entity.jpg"/>
 
-16. Double click on the "Endpoint" represented by a red dot. 
-17. Configure it to return an "Object" 
+16. Double click on the **Endpoint** represented by a red dot. 
+17. Configure it to return an **Object** 
 
 <img src="readme-img/mx-build-page-nanoflow-return.jpg"/>
 
-18. Set the value to the newly created Object.
+18. Set the value to the newly created Object. 
 
 <img src="readme-img/mx-build-page-nanoflow-set-return.jpg"/>
 
-19. Open up the "Home_Start" page again.
+19. Open up the **Home_Start** page again.
 20. Drag the entiere existing layout into the Dataview.
 
 <img src="readme-img/mx-build-layout-drag.gif"/>
 
-21. Double click on the Picture control and connect it to the "Picture" entity.
-22. Double click on the "List view" and connect it to the associated entity "Label"
+21. Double click on the Picture *control* and connect it to the Picture *entity*.
+
+<img src="readme-img/mx-pic-cntrlp-toentity.png"/>
+
+22. Double click on the **List view**. Select **Data source** tab. Next to **Entity (path)** click **Select** and pick entity *Label*
 
 <img src="readme-img/mx-build-page-listview-association.jpg"/>
 
-23. Configure the left parameter in the ListView by double-clicking on the text item, then use then connect Parameter {1} up to "Name".
+23. Configure the left parameter in the ListView by double-clicking on the **Text item**, then use then connect Parameter {1} up to **Name**.
+Caption: {1}
+Parameter type: Attribute path
+Attribute path: MxRekogniitonDemo_Start.Label.Name
 
 <img src="readme-img/mx-build-page-setting-labels.jpg"/>
 
-24. Configure the right parameter in the ListView by double-clicking on the text item, then use then connect Parameter {1} up to "Confidence".
+24. Configure the right parameter in the ListView by double-clicking on the **Text item**, then use then connect Parameter {1} up to **Confidence**.
 
 <img src="readme-img/mx-build-page-setting-labels-confidence.jpg"/>
 
@@ -391,15 +397,15 @@ Logic in Mendix is defined using Microflows for server-side logic and Nanoflows 
 
 To perform the logic needed we'll create a Nanoflow which will open up the camera, save the picture, process it by Rekognition, and save the results. Here are the steps:
 
-1. Right-click on the "Take a picture" button and click "Edit on click action".
-2. Select from the dropdown "Call a Nanoflow".
-3. Click the "New" button.
-4. Enter the name "ACT_TakePicture" and click "OK".
+1. Right-click on the **Take a picture** button and click **Edit on click action**.
+2. Select from the dropdown **Call a Nanoflow**.
+3. Click the **New** button.
+4. Enter the name *ACT_TakePicture* and click **OK**.
 
 <img src="readme-img/mx-build-page-edit-action.jpg"/>
 
 5. Open up the newly built Nanoflow.
-6. Drag and Drop from the Toolbox a "Take Picture" action.
+6. Drag and Drop from the Toolbox a **Take Picture** action. The box has to be in the middle of an arrow as on the screenshot.
 
 <img src="readme-img/mx-build-logic-take-picture.jpg"/>
 
@@ -413,30 +419,32 @@ To perform the logic needed we'll create a Nanoflow which will open up the camer
 <img src="readme-img/mx-build-logic-take-picture-options.jpg"/>
 
 8. From the Toolbox drag the detect custom labels action and configure as follows:
-    - ProjectARN = Your Rekognition ARN
-    - Image = NewPicture
+    - ProjectARN = Your Rekognition ARN. 
+    Copy paste your Rekognition model and use single quotes. Example: 'arn:aws:rekognition:us-west-2:123456:project/awsworkshop-mendix-aicv/version/awsworkshop-mendix-aicv.2022-07-19T11.24.01/1658244241480'
+    - Image = $Picture
     - MaxResults = 10
     - MinConfidence = 0
-    - AWS_Region = your region
+    - AWS_Region = your region.
+    Press *Control + Space* and type *AWS_Rekognition.AWS_Region.* and select your region.
 
 <img src="readme-img/mx-build-logic-Rekognition.jpg"/>
 
-9. Add a Loop activity to the microflow and connect it to the CustomLabel List
+9. Drag a **Loop** activity from the **Toolbox** to the microflow and connect it to the CustomLabel List.
 
 <img src="readme-img/mx-build-logic-loop.jpg"/>
 
-10. Inside the loop drag a retrieve action to retrieve the BoundingBox.
-11. Connect up the retrieve action by double-clicking on the action, selecting "By association", clicking "Select", and selecting the Bounding Box association.
+10. Inside the loop drag a **Retrieve** action from the **Toolbox** to retrieve the **BoundingBox**.
+11. Connect up the retrieve action by double-clicking on the action, selecting **By association**, clicking **Select**, and selecting the **Bounding Box** association.
 
 <img src="readme-img/mx-build-logic-retrieve-action.jpg"/>
 
-12. Drag on a "Create" action into the loop and draw a line from the bounding box to the "Create" action.
+12. Drag on a **Create** action from the **Toolbox** into the loop and draw a line from the bounding box to the "Create" action.
 
 <img src="readme-img/mx-build-logic-create-action.jpg"/>
 
 13. Configure the activity by selecting the Entity "Label".
 14. Set 3 Members to the following:
-    - Label_Picture = $NewPicture
+    - Label_Picture = $Picture
     - Confidence = $IteratorCustomLabel/Confidence
     - Name = $IteratorCustomLabel/Name
 
@@ -449,13 +457,14 @@ To perform the logic needed we'll create a Nanoflow which will open up the camer
     - High Confidence Threshold = 80
     - Medium Confidence Threshold = 50
 
+<img src="readme-img/mx-build-logic-canva.png"/>
 <img src="readme-img/mx-build-logic-bounding-box.jpg"/>
 
-16. We're now complete so we need to run the project in the cloud. Click the 'Publish' button on the top right.
+16. We are now complete so we need to run the project in the cloud. Click the **Publish** button on the top right.
 
 <img src="readme-img/mx-build-publish-app.jpg"/>
 
-17. You'll then see a message informing you that the deployment is in process
+17. You will then see a message informing you that the deployment is in process.
 
 <img src="readme-img/mx-build-publish-app-inprogress.jpg"/>
 
@@ -467,6 +476,6 @@ To perform the logic needed we'll create a Nanoflow which will open up the camer
 
 <img src="readme-img/mx-build-run-qrcode.jpg"/>
 
-20. Use your newly built app!
+20. Congratulations you can now use your newly built app!
 
 <img src="readme-img/end-result.jpg"/>
