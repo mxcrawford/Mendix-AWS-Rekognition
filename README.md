@@ -285,7 +285,7 @@ In order to authenticate with AWS services, it's important that requests are sig
 
 ### Setting up the Rekognition constants
 The Rekognition module has two constants that need to be set to ensure that the APIs can communicate with the pre-built Rekognition model. These are:
-1. AWS_HostPattern - This should be the URL of the endpoint that the API is calling, this will be different depending on the AWS region used for Rekognition. The endpoint URLs can be found here: https://docs.aws.amazon.com/general/latest/gr/rekognition.html. 
+1. AWS_HostPattern - This should be the URL of the endpoint that the API is calling, this will be different depending on the AWS region used for Rekognition. The endpoint URLs can be found here: https://docs.aws.amazon.com/general/latest/gr/rekognition.html. MAKE SURE TO INCLUDE THE https://
 
 The URL of the rekognition endpoint is usually in this format: 
 ```https://rekognition.{aws-region}.amazonaws.com```. But this will be slightly different if you're running from US Gov Or FIPS Cloud.
@@ -475,7 +475,7 @@ To perform the logic needed we'll create a Nanoflow which will open up the camer
     - Confidence = $IteratorCustomLabel/Confidence
     - Name = $IteratorCustomLabel/Name
   
-15. Commit the Label Object
+15. Make sure to Commit the Label Object by checking the "Commit" Checkbox
 
 
 <img src="readme-img/mx-build-logic-create-configure.jpg"/>
