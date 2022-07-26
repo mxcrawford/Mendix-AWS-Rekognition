@@ -349,13 +349,20 @@ The first step with many Mendix projects is to start with building the data stru
 
 <img src="readme-img/mx-build-page-build-blocks.jpg"/>
 
-6. Next, we need to connect these up to our Picture object. Click on the **Widgets** tab on the right-hand side.
-7. Drag on a **Data view** widget onto the page at the top.
+Now to give these widgets some data context, we will create a new instance of the Picture entity/object that we will use to:
+1) Take a picture with and store the image in
+2) Show the Label date that we receive from Rekognition that is associated with our picture (This is why we connected the Label and Picture Entity together in the Domain Model in our previous steps)
+
+3. We need to tell the page the context object that we plan to work with (of type Picture) and for this we use a **Data View** and connect this up to our Picture object that we created in the Domain Model. Click on the **Widgets** tab on the right-hand side.
+4. Drag on a **Data view** widget onto the page at the top.
 
 <img src="readme-img/mx-build-page-dataview.jpg"/>
 
 8. Double click on the Date View widget to open up the properties dialog.
 9. Under **Data source** section, Select Type: **Nanoflow**. You can find more information on Nanoflows here: [Nanoflows](https://docs.mendix.com/refguide/nanoflows/)
+
+Our Nanoflow will allow us to create a new Picture context object to do what we need to do, every time the page loads
+
 10. Click the **Select** button.
 
 <img src="readme-img/mx-build-page-datasource.jpg"/>
@@ -386,8 +393,10 @@ The first step with many Mendix projects is to start with building the data stru
 
 <img src="readme-img/mx-build-page-nanoflow-set-return.jpg"/>
 
-19. Open up the **Home_Start** page again.
-20. Drag the entiere existing layout into the Dataview.
+This Nanoflow is now complete, and we can move onto our next step
+
+1.  Open up the **Home_Start** page again.
+2.  Drag the entiere existing layout into the Dataview.
 
 <img src="readme-img/mx-build-layout-drag.gif"/>
 
