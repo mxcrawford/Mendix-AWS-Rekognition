@@ -13,26 +13,28 @@ You can open an AWS Account and access AWS Free Tier Offers: [Learn more and Cre
 # Workshop Outline:
 
 - [Mendix AWS Rekoginition Template](#mendix-aws-rekoginition-template)
+- [Workshop Outline:](#workshop-outline)
   - [AWS Build](#aws-build)
-    - [Amazon S3 Dataset](#aws-s3-dataset)
-    - [Amazon Rekognition](#rekognition-training)
-      - [Create Project (console)](#create-a-project-console)
+    - [Amazon S3 Dataset](#amazon-s3-dataset)
+    - [Amazon Rekognition](#amazon-rekognition)
+      - [Create Project (console)](#create-project-console)
       - [Create Dataset](#create-dataset)
       - [Label Images](#label-images)
       - [Train Model](#train-model)
       - [Evaluate](#evaluate)
       - [Use Model](#use-model)
   - [Mendix Setup](#mendix-setup)
-    - [Launch Windows EC2 Instance with Mendix Studio Pro Installed](#launch-windows-ec2-instance-with-mendix-studio-pro-installed)
+    - [Launch windows EC2 Instance with Mendix Studio Pro Installed](#launch-windows-ec2-instance-with-mendix-studio-pro-installed)
     - [Download release from this repo](#download-release-from-this-repo)
   - [Setup your project](#setup-your-project)
   - [The Mendix Build](#the-mendix-build)
-    - [Create your AWS Keys](#creating-your-aws-keys)
-    - [Set your AWS Access and Secret Keys in Mendix](#setting-your-aws-access-and-secret-keys-in-mendix)
-    - [Set up the Amazon Rekognition constants](#setting-up-the-rekognition-constants)
-    - [Build the Domain Model](#building-the-domain-model)
-    - [Build the User Interface](#building-the-user-interface)
-    - [Build the logic](#building-the-logic)
+    - [Creating your AWS Keys](#creating-your-aws-keys)
+    - [Security Policy for Rekognition](#security-policy-for-rekognition)
+    - [Setting your AWS Access and Secret Keys in Mendix](#setting-your-aws-access-and-secret-keys-in-mendix)
+    - [Setting up the Rekognition constants](#setting-up-the-rekognition-constants)
+    - [Building the domain model](#building-the-domain-model)
+    - [Building the User Interface](#building-the-user-interface)
+    - [Building the logic](#building-the-logic)
 
 ## AWS Build
 
@@ -254,10 +256,26 @@ To generate an AWS Access and Secret Key follow the steps below:
 2. [Create an IAM Admin](https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/su-account-user.html)
 3. [Create Access Keys](https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/su-awscli-sdk.html)
 
+### Security Policy for Rekognition
+To keep it simple you can use stronger credentials, but in order to interact with the model ONLY, the following policy example can be used and modified:
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": "rekognition:DetectCustomLabels",
+            "Resource": "arn:aws:rekognition:eu-central-1:<account id>:project/<project-name>/version/*/*"
+        }
+    ]
+}
+```
+
 ### Setting your AWS Access and Secret Keys in Mendix
 In order to authenticate with AWS services, it's important that requests are signed using an AWS access and secret key. In Mendix this is done using the Sig4 process. Inside this application, we have already included a module to help with this process.
 1. Create access and secret key pair on AWS with access to Rekognition service.
-
 2. Copy each of the keys.
 3. With the application open inside Studio Pro expand the Marketplace modules folder item in the app explorer.
 4. Then expand the AWS_Sig4 module.
@@ -447,6 +465,9 @@ To perform the logic needed we'll create a Nanoflow which will open up the camer
     - Label_Picture = $Picture
     - Confidence = $IteratorCustomLabel/Confidence
     - Name = $IteratorCustomLabel/Name
+  
+15. Commit the Label Object
+
 
 <img src="readme-img/mx-build-logic-create-configure.jpg"/>
 
