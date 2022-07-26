@@ -66,7 +66,7 @@ Note: AWS Config and role should have permission for Rekognition. Check an IAM U
 You can find and download the image dataset from here: [Cars Folder](/rekognition-dataset)
 
 
-8. Open the [IAM console](/https://console.aws.amazon.com/iam/)
+8. Open the [IAM console](https://console.aws.amazon.com/iam/)
 9. In the navigation pane of the IAM console, choose **Roles**, and then choose **Create role**.
 10. For **Select trusted entity**, choose **AWS service**.
 11. From Use Case  search **Rekognition**. Use cases are defined by the service to include the trust policy required by the service. Then, choose **Next**.
