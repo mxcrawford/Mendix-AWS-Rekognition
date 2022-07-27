@@ -43,14 +43,14 @@ You can open an AWS Account and access AWS Free Tier Offers: [Learn more and Cre
 ## AWS Build
 
 ### Amazon S3 Dataset
-The image dataset used in the webinar is available here: [Cars.zip](https://s3.eu-central-1.amazonaws.com/mendixdemo.com/aws/cars.zip)
+The image dataset used in the webinar is available here: [Cars.zip](https://s3.eu-central-1.amazonaws.com/mendixdemo.com/aws/cars.zip) Download and unzip folder.
 
 1.	Sign in to the AWS Management Console and open the Amazon S3 console at https://console.aws.amazon.com/s3/.
 2.	Choose Create bucket.
 The Create bucket wizard opens.
 3.	In Bucket name, enter a DNS-compliant name for your bucket. For example *mendixcars-yourname*
 4.	In Region, choose the AWS Region where you want the bucket to reside.
-Choose a Region close to you to minimize latency and costs and address regulatory requirements.
+Choose a Region close to you to minimize latency and costs and address regulatory requirements. Validate that Amazon Rekognition service is available in that region.
 5.	Leave other settings as default, scroll down and click **Create bucket** button.
 6.	Select a new bucket. You can and create folders in the bucket by clicking **Create folder** button and manually upload pictures by used drag and drop.
 Alternatively you can use AWS CLI to sync files with your local drive.
@@ -67,8 +67,7 @@ Note: AWS Config and role should have permission for Rekognition. Check an IAM U
 
 <img src="readme-img/console.png"/>
 
-You can find and download the image dataset from here: [Cars Folder](/rekognition-dataset)
-
+Note: make sure that you upload "cars" folder to the bucket.
 
 8. Open the [IAM console](https://console.aws.amazon.com/iam/)
 9. In the navigation pane of the IAM console, choose **Roles**, and then choose **Create role**.
