@@ -35,6 +35,10 @@ You can open an AWS Account and access AWS Free Tier Offers: [Learn more and Cre
     - [Building the domain model](#building-the-domain-model)
     - [Building the User Interface](#building-the-user-interface)
     - [Building the logic](#building-the-logic)
+- [Bonus 1](#bonus-1)
+  - [Change your app and use it to detect celebrity faces!](#change-your-app-and-use-it-to-detect-celebrity-faces)
+- [Bonus 2](#bonus-2)
+  - [Publish messages using AWS IoT Core & MQTT](#publish-messages-using-aws-iot-core--mqtt)
 
 ## AWS Build
 
@@ -513,3 +517,89 @@ To perform the logic needed we'll create a Nanoflow which will open up the camer
 20. Congratulations you can now use your newly built app!
 
 <img src="readme-img/end-result.jpg"/>
+
+
+If you're streaking ahead, you can always try out the bonus activity
+
+# Bonus 1
+
+## Change your app and use it to detect celebrity faces!
+
+You will need to do a few things:
+1. Train a new model with some celebrity faces
+2. Update the Nanoflow "TakePicture" to use your new model
+3. If you want, update your UI to tell the User which Celebrity is in the picture
+
+
+# Bonus 2
+
+## Publish messages using AWS IoT Core & MQTT
+
+You will need a few things for this:
+1. Setup an MQTT thing in [IoT Core](https://docs.aws.amazon.com/iot/latest/developerguide/iot-moisture-create-thing.html#:~:text=In%20the%20AWS%20IoT%20console,choose%20Create%20a%20single%20thing.)
+
+
+2. Download the [project MPK](https://s3.eu-central-1.amazonaws.com/mendixdemo.com/aws/Mendix_AWS_IoT.mpk)
+
+You will be creating a whole new project for this using the steps above in [Setup your project](#setup-your-project)
+
+3. Turn on Dark Mode 
+
+<img src="readme-img/bonus1.jpg"/>
+
+<img src="readme-img/bonus2.jpg"/>
+
+4. To explore the Mendix Marketplace and download the MQTT Connector
+
+<img src="readme-img/bonus1.png"/>
+
+5. Connect the MQTT Config page provided up to the **Navigation**  
+
+<img src="readme-img/bonus3.png"/>
+
+6. Configure your MQTT using the device information you created in **IoT Core**
+
+<img src="readme-img/bonus4.jpg"/>
+
+7. Create an Entity in the Domain model that is NON-PERSISTENT Called **Comment** 
+8. Add an attribute to that entity that can store a String attribute **Message**
+9.  Create a DSO Nanoflow like we did in the Rekognition project that CREATES and RETURNS an instance of the **Comment** Entity
+10. Place a **Data View** on the **Home_IoT_Start** start page and select the new DSO (Data Source) Nanoflow as the data source
+11. Add a text box widget from the **Toolbox** that can help capture the message attribute
+12. Add a **Microflow** button inside the **Data View** in order to send the message
+13. Behind the Microflow button, create a new Microflowm to send the message
+14. In the Microflow, drag on a **Retrieve** activity from the **Toolbox** the IoT Config From the database
+
+<img src="readme-img/bonus5.jpg"/>
+
+15. Now drag on a **Export with mapping** activity from the **Toolbox**
+16. In this Export activity, Select a mapping, and click on **New** to create a new one
+
+<img src="readme-img/bonus6.jpg"/>
+
+17. Open the new mapping, click on **Select Elements** at the top
+18. Select **JSON Structure**
+19. Click **Select** and create a new JSON mapping
+20. Enter the following simple JSON structure
+
+```
+{
+	"Message": "Hello World!"
+}
+```
+21. Click Refresh and OK
+22. Inside the mapping you can automatically map your Mendix **Comment** Entity to the JSON structure by selecting, **Map Automatically** at the top
+23. Once the mapping is done, inside your Microflow, in the Export mapping activity, select your Comment object as a Paramenter and click OK
+24. Select the output for the export mapping to be a String
+25. Use the **Toolbox** to drag on the **Publish MQTT** activity
+26. Fill in the details of the MQTT, use the topic:
+```
+things/comments
+```
+27. Use the Output JSON String from the export as the **Payload**
+28. Select QoS as "At least once"
+29. Set Retained to true
+
+Your Microflow should be complete, you can run the project locally by using the **Green** run button at the top (left of the publish button)
+
+You should be able to log into the AWS IoT Core console, and subscribe to your topic to test the messages
