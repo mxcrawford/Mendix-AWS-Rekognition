@@ -39,7 +39,7 @@ You can open an AWS Account and access AWS Free Tier Offers: [Learn more and Cre
 ## AWS Build
 
 ### Amazon S3 Dataset
-The image dataset used in the webinar is available here: [Cars Folder](/rekognition-dataset/)
+The image dataset used in the webinar is available here: [Cars.zip](https://s3.eu-central-1.amazonaws.com/mendixdemo.com/aws/cars.zip)
 
 1.	Sign in to the AWS Management Console and open the Amazon S3 console at https://console.aws.amazon.com/s3/.
 2.	Choose Create bucket.
@@ -181,20 +181,22 @@ We will be using Mendix Studio Pro to develop our app, which requires a Windows 
 
 ### Launch windows EC2 Instance with Mendix Studio Pro Installed
 
-1. We have published a Cloudformation Template that you can easily launch which is an EC2 Instance with an AMI that contains Mendix Studio Pro already installed.
+We have published a Cloudformation Template that you can easily launch which is an EC2 Instance with an AMI that contains Mendix Studio Pro already installed.
 
-[<img src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png">](https://console.aws.amazon.com/cloudformation/home?region=eu-central-1#/stacks/new?stackName=MendixStudioPro-Windows&templateURL=https://mendix-aws.s3.eu-central-1.amazonaws.com/windows_mendix_v2.json)
-
-2. In order for the Cloudformation process to work you first need to create a EC2 Keypair. This can be created by searching for EC2 in the AWS Console, clicking on keypairs and creating a new one.
+1. In order for the Cloudformation process to work you first need to create a EC2 Keypair. This can be created by searching for EC2 in the AWS Console, clicking on keypairs and creating a new one.
 
 <img src="readme-img/create-keypair.png">
 
-3. When you have the Key pair dialog box open give it a name and select the PEM option.
+2. The Key pair dialog box will open, give it a name and select the PEM option.
 
 <img src="readme-img/keypair-pem.png"/>
 
-4. Click create key pair, which will generate you a key in PEM format and download to your computer. You will need this key pair to successfully run the Cloud Formation process.
 
+3. Click create key pair, which will generate you a key in PEM format and download to your computer. You will need this key pair to successfully run the Cloud Formation process.
+
+4. When you have the Key Pair you can launch the cloud formation template:
+
+[<img src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png">](https://console.aws.amazon.com/cloudformation/home?region=eu-central-1#/stacks/new?stackName=MendixStudioPro-Windows&templateURL=https://mendix-aws.s3.eu-central-1.amazonaws.com/windows_mendix_v2.json)
 
 5. In the cloudformation steps select the newly created keypair under the keyname option.
 
@@ -453,6 +455,8 @@ To perform the logic needed we'll create a Nanoflow which will open up the camer
     - MinConfidence = 0
     - AWS_Region = your region.
     Press *Control + Space* and type *AWS_Rekognition.AWS_Region.* and select your region.
+
+    Lastly, the Detect Custom Labels action returns a list of labels, make sure to give it a clear name
 
 <img src="readme-img/mx-build-logic-Rekognition.jpg"/>
 
