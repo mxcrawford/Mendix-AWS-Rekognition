@@ -147,7 +147,7 @@ In this example, we will train to analyze car makers and damages.
 <img src="readme-img/rekognition-train-model.png">
 
 2.  Keep default settings and click **Train model**. Depending on a number of images it will take from 30 minutes to 24 hours. 
-Note: 200 images takes about 40 minutes.
+Note: 200 images takes about 40 minutes. You don't have to wait for model completion please proceed to the next section.
 
 <img src="readme-img/rekognition-train-confirmation.png">
 
@@ -257,9 +257,8 @@ In order to connect to AWS Rekognition it's important that you set up a number o
 
 ### Creating your AWS Keys
 To generate an AWS Access and Secret Key follow the steps below: 
-1. [Create an AWS Account](https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/su-account.html)
-2. [Create an IAM Admin](https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/su-account-user.html)
-3. [Create Access Keys](https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/su-awscli-sdk.html)
+1. [Create an IAM Admin](https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/su-account-user.html)
+2. [Create Access Keys](https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/su-awscli-sdk.html)
 
 ### Security Policy for Rekognition
 To keep it simple you can use stronger credentials, but in order to interact with the model ONLY, the following policy example can be used and modified:
