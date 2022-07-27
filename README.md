@@ -393,7 +393,7 @@ Our Nanoflow will allow us to create a new Picture context object to do what we 
 
 <img src="readme-img/mx-build-page-nanoflow-return.jpg"/>
 
-18. Set the value to the newly created Object. 
+18. Set the value to the newly created Object $NewPicture. You can click Ctrl + Space and select it from dropdown. 
 
 <img src="readme-img/mx-build-page-nanoflow-set-return.jpg"/>
 
