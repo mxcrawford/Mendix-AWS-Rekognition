@@ -397,6 +397,8 @@ Our Nanoflow will allow us to create a new Picture context object to do what we 
 
 <img src="readme-img/mx-build-page-nanoflow-set-return.jpg"/>
 
+19. Click File -> Save All.
+
 This Nanoflow is now complete, and we can move onto our next step
 
 1.  Open up the **Home_Start** page again.
@@ -601,3 +603,32 @@ things/comments
 Your Microflow should be complete, you can run the project locally by using the **Green** run button at the top (left of the publish button)
 
 You should be able to log into the AWS IoT Core console, and subscribe to your topic to test the messages
+
+# Clean up
+
+## Amazon Rekogniton Clean up
+
+
+1. Open Amazon Rekognition Console.  Select a region where you built a project on the top.
+2.  Select Custom Labels from the menu on the left side and choose Project.
+
+
+<img src="readme-img/cleanup-rek1.png"/>
+
+3. Under models, click on the  hyperlink of the model name.
+
+<img src="readme-img/cleanup-rek2.png"/>
+
+4. Click on the Use model tab. Click Stop.
+
+<img src="readme-img/cleanup-rek3.png"/>
+
+5. In the popup window, type *stop*. Wait for a model to be  stopped. 
+
+6. Once the model is stopped, go back to the project. Select a model with a checkbox and click Delete model button.
+
+<img src="readme-img/cleanup-rek4.png"/>
+
+7. In the popup window, type *delete*. Wait for a model to be  stopped. 
+
+## Amazon S3 Clean up
