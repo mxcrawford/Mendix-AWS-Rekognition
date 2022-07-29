@@ -619,16 +619,38 @@ You should be able to log into the AWS IoT Core console, and subscribe to your t
 
 <img src="readme-img/cleanup-rek2.png"/>
 
-4. Click on the Use model tab. Click Stop.
+4. Click on the Use model tab. Click **Stop**.
 
 <img src="readme-img/cleanup-rek3.png"/>
 
 5. In the popup window, type *stop*. Wait for a model to be  stopped. 
 
-6. Once the model is stopped, go back to the project. Select a model with a checkbox and click Delete model button.
+6. Once the model is stopped, go back to the project. Select a model with a checkbox and click **Delete model** button.
 
 <img src="readme-img/cleanup-rek4.png"/>
 
 7. In the popup window, type *delete*. Wait for a model to be  stopped. 
 
 ## Amazon S3 Clean up
+
+1. Open AWS Console for Amazon S3. Select a bucket that contains an image dataset. Click on **Empty** button at the top.
+
+<img src="readme-img/cleanup-s3-1.png"/>
+
+2. In the new window type *permanently delete* to delete objects in the bucket.
+
+3. Once bucket will be emptied, go back to Amazon S3 bucket list and select your bucket. Click on **Delete** button at the top.
+
+<img src="readme-img/cleanup-s3-2.png"/>
+
+## Amazon EC2 Clean up
+
+1. Open EC2 Console. Select *Frankfurt* region at the top. Click on *Instances (running)*
+
+<img src="readme-img/cleanup-ec2-1.png"/>
+
+2. Select your instance from the list. Expand *Instance state* dropdown at the top and click **Terminate instance**
+
+<img src="readme-img/cleanup-ec2-2.png"/>
+
+3. In the popup window, confirm **Terminate**
