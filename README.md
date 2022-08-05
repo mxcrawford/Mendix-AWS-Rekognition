@@ -17,6 +17,7 @@ You can open an AWS Account and access AWS Free Tier Offers: [Learn more and Cre
   - [AWS Build](#aws-build)
     - [Amazon S3 Dataset](#amazon-s3-dataset)
     - [Amazon Rekognition](#amazon-rekognition)
+      - [Create S3 Bucket when prompted](#create-s3-bucket-when-prompted)
       - [Create Project (console)](#create-project-console)
       - [Create Dataset](#create-dataset)
       - [Label Images](#label-images)
@@ -39,6 +40,10 @@ You can open an AWS Account and access AWS Free Tier Offers: [Learn more and Cre
   - [Change your app and use it to detect celebrity faces!](#change-your-app-and-use-it-to-detect-celebrity-faces)
 - [Bonus 2](#bonus-2)
   - [Publish messages using AWS IoT Core & MQTT](#publish-messages-using-aws-iot-core--mqtt)
+- [Clean up](#clean-up)
+  - [Amazon Rekogniton Clean up](#amazon-rekogniton-clean-up)
+  - [Amazon S3 Clean up](#amazon-s3-clean-up)
+  - [Amazon EC2 Clean up](#amazon-ec2-clean-up)
 
 ## AWS Build
 
@@ -51,6 +56,7 @@ The image dataset used in the webinar is available here: [Cars.zip](https://s3.e
 **IMPORTANT: AWS accounts have a 100 bucket limit by default: [Bucket restrictions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/BucketRestrictions.html)**
 
 The Create bucket wizard opens.
+
 3.	In Bucket name, enter a DNS-compliant name for your bucket. For example *mendixcars-yourname*
 4.	In Region, choose the AWS Region where you want the bucket to reside.
 Choose a Region close to you to minimize latency and costs and address regulatory requirements. Validate that Amazon Rekognition service is available in that region.
@@ -522,7 +528,7 @@ Example:
 
 9. Drag a **Loop** activity from the **Toolbox** to the microflow and connect it to the CustomLabel List.
 
-<img src="readme-img/mx-build-logic-loop.jpg"/>
+<img src="readme-img/mx-logic-loop-1.gif"/>
 
 10. Inside the loop drag a **Retrieve** action from the **Toolbox** to retrieve the **BoundingBox**.
 11. Connect up the retrieve action by double-clicking on the action, selecting **By association**, clicking **Select**, and selecting the **Bounding Box** association.
