@@ -144,7 +144,23 @@ The first time you use Rekognition in a region, it will prompt you to create an 
 
 <img src="readme-img/rekognition-permissions2.png">
 
-9. Change the principal from *rekognition.amazonaws.com* service to the ARN of role created in Step 12 of previous section. Click Save changes to save policy update.
+9. Change the principal from *rekognition.amazonaws.com* service to the ARN of role created in Step 12 of previous section. Click Save changes to save policy update. In each instance of
+```
+"Principal": {
+  "Service" : "rekognition.amazonaws.com"
+}
+```
+
+with 
+
+```
+"Principal": {
+  "AWS" : "arn:aws:iam::<insert role ARN details>"
+}
+```
+
+**There will be FOUR instances that need to be replaced**
+
 
 <img src="readme-img/rekognition-role-update.jpg">
 
@@ -169,6 +185,13 @@ Note: 200 images takes about 40 minutes. You don't have to wait for model comple
 <img src="readme-img/rekognition-train-confirmation.png">
 
 <img src="readme-img/rekognition-train-process.png">
+
+3. Check on Status 
+
+<img src="readme-img/running-training-1.png">
+
+4. What do we do while we wait!? While your model is training, feel free to start with the steps starting at [Mendix Setup](#mendix-setup)
+
 
 #### Evaluate
 1.	In the Models section of the project page, you can check the current status in the Model Status column, where the training's in progress.
