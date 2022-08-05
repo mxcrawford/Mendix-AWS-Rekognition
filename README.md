@@ -52,12 +52,14 @@ The Create bucket wizard opens.
 4.	In Region, choose the AWS Region where you want the bucket to reside.
 Choose a Region close to you to minimize latency and costs and address regulatory requirements. Validate that Amazon Rekognition service is available in that region.
 5.	Leave other settings as default, scroll down and click **Create bucket** button.
-6.	Select a new bucket. You can and create folders in the bucket by clicking **Create folder** button and manually upload pictures by used drag and drop.
-Alternatively you can use AWS CLI to sync files with your local drive.
-
+6.	Select a new bucket. You should be able to upload the entire **Cars** folder by dragging and dropping it to upload or sync the folder with your local files using the AWS CLI. 
+<img src="readme-img/s3-bucket-upload.gif"/>
 <img src="readme-img/s3-bucket.png"/>
 
+
+
 7. If you decide to use AWS CLI, make sure you configire credentials by following instructuins outlined in the [AWS documentation](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html). 
+
 
 Note: AWS Config and role should have permission for Rekognition. Check an IAM User that is used in AWS CLI Config. Create a group in IAM such as *PerformActionToRekognition*. Attach **AmazonRekognitionFullAccess** policy to group. Add your IAM user to the newly created group.
 
@@ -65,9 +67,10 @@ Note: AWS Config and role should have permission for Rekognition. Check an IAM U
 
 ```aws s3 sync . s3://mybucket```
 
-<img src="readme-img/console.png"/>
+<img src="readme-img/s3-bucket-upload-2.gif"/>
 
 Note: make sure that you upload "cars" folder to the bucket.
+
 
 8. Open the [IAM console](https://console.aws.amazon.com/iam/)
 9. In the navigation pane of the IAM console, choose **Roles**, and then choose **Create role**.
@@ -77,7 +80,13 @@ Note: make sure that you upload "cars" folder to the bucket.
 <img src="readme-img/iam-role-create.jpg"/>
 
 12. Give role name such as *Mendix_Rekog_To_S3*. Review information and click **Create role**.
+13. Once the role is created, find it in the search bar and drill down into it
 
+<img src="readme-img/rekognition-role1.png"/>
+
+14. Make sure to copy the ARN using the copy icon and keep this for later steps
+
+<img src="readme-img/rekognition-role2.png"/>
 
 
 ### Amazon Rekognition
@@ -90,6 +99,14 @@ No machine learning expertise is required to build your custom model. Rekognitio
 Rekognition Custom Labels builds off of Rekognition’s existing capabilities, which are already trained on tens of millions of images across many categories. Instead of thousands of images, you simply need to upload a small set of training images (typically a few hundred images or less) that are specific to your use case into our easy-to-use console. If your images are already labeled, Rekognition can begin training in just a few clicks. If not, you can label them directly within Rekognition’s labeling interface, or use Amazon SageMaker Ground Truth to label them for you. Once Rekognition begins training from your image set, it can produce a custom image analysis model for you in just a few hours. Behind the scenes, Rekognition Custom Labels automatically loads and inspects the training data, selects the right machine learning algorithms, trains a model, and provides model performance metrics. You can then use your custom model via the Rekognition Custom Labels API and integrate it into your applications.
 
 In this example, we will train to analyze car makers and damages.
+
+#### Create S3 Bucket when prompted
+
+The first time you use Rekognition in a region, it will prompt you to create an S3 bucket to store your project files
+1. Click **Create S3 bucket**
+
+
+<img src="readme-img/running-first-time.png">
 
 #### Create Project (console)
 1.	Sign in to the AWS Management Console and open the Amazon Rekognition console at https://console.aws.amazon.com/rekognition/
