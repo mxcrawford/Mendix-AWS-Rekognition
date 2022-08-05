@@ -47,6 +47,9 @@ The image dataset used in the webinar is available here: [Cars.zip](https://s3.e
 
 1.	Sign in to the AWS Management Console and open the Amazon S3 console at https://console.aws.amazon.com/s3/.
 2.	Choose Create bucket.
+
+**IMPORTANT: AWS accounts have a 100 bucket limit by default: [Bucket restrictions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/BucketRestrictions.html)**
+
 The Create bucket wizard opens.
 3.	In Bucket name, enter a DNS-compliant name for your bucket. For example *mendixcars-yourname*
 4.	In Region, choose the AWS Region where you want the bucket to reside.
@@ -55,7 +58,6 @@ Choose a Region close to you to minimize latency and costs and address regulator
 6.	Select a new bucket. You should be able to upload the entire **Cars** folder by dragging and dropping it to upload or sync the folder with your local files using the AWS CLI. 
 <img src="readme-img/s3-bucket-upload.gif"/>
 <img src="readme-img/s3-bucket.png"/>
-
 
 
 7. If you decide to use AWS CLI, make sure you configire credentials by following instructuins outlined in the [AWS documentation](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html). 
@@ -136,9 +138,12 @@ The first time you use Rekognition in a region, it will prompt you to create an 
 
 7.	Scroll down and copy the policy provided.  In a new tab, open the S3 console and select your bucket with images. 
 
+
 <img src="readme-img/rekognition-policy.png">
 
 8.	On **Permissions** tab scroll down to **Bucket policy** and click edit and paste the policy. 
+
+**IMPORTANT: Make sure to delete any leading whitespace after pasting**
 
 <img src="readme-img/rekognition-permissions.png">
 
@@ -172,8 +177,6 @@ with
 
 <img src="readme-img/rekognition-labelling1.png">
 
-
-
 #### Train Model
 1.  On the Project page, choose **Train model**.
 
@@ -184,11 +187,9 @@ Note: 200 images takes about 40 minutes. You don't have to wait for model comple
 
 <img src="readme-img/rekognition-train-confirmation.png">
 
-<img src="readme-img/rekognition-train-process.png">
-
 3. Check on Status 
 
-<img src="readme-img/running-training-1.png">
+<img src="readme-img/rekognition-train-process.png">
 
 4. What do we do while we wait!? While your model is training, feel free to start with the steps starting at [Mendix Setup](#mendix-setup)
 
@@ -287,7 +288,9 @@ You should now see your windows desktop with Mendix installed.
 
 <img src="readme-img/import1.png">
 
-4. Next, select your choice of version control and location of your project - for this exercise it is recommended to use SVN which Mendix uses in the developer portal
+4. Next, select your choice of version control and location of your project - for this exercise it is recommended to use SVN which Mendix uses in the developer portal. Select **New Mendix Teamserver**
+
+<img src="readme-img/mx-setup-new-teamserver.png">
 
 The project will now be created and uploaded to the repository
 
@@ -395,7 +398,7 @@ The first step with many Mendix projects is to start with building the data stru
 
 Now to give these widgets some data context, we will create a new instance of the Picture entity/object that we will use to:
 1) Take a picture with and store the image in
-2) Show the Label date that we receive from Rekognition that is associated with our picture (This is why we connected the Label and Picture Entity together in the Domain Model in our previous steps)
+2) Show the Label data that we receive from Rekognition that is associated with our picture (This is why we connected the Label and Picture Entity together in the Domain Model in our previous steps)
 
 3. We need to tell the page the context object that we plan to work with (of type Picture) and for this we use a **Data View** and connect this up to our Picture object that we created in the Domain Model. Click on the **Widgets** tab on the right-hand side.
 4. Drag on a **Data view** widget onto the page at the top.
@@ -454,11 +457,15 @@ This Nanoflow is now complete, and we can move onto our next step
 
 <img src="readme-img/mx-build-page-listview-association.jpg"/>
 
+**Select NO when asked to automatically fill the contents**
+
+<img src="readme-img/mx-build-page-listview-autogenerate.jpg"/>
+
 23. Configure the left parameter in the ListView by double-clicking on the **Text item**, then use then connect Parameter {1} up to **Name**.
 Caption: {1}
 Parameter type: Attribute path
 Attribute path: MxRekogniitonDemo_Start.Label.Name
-
+mx-build-page-listview-autogenerate.jpg
 <img src="readme-img/mx-build-page-setting-labels.jpg"/>
 
 24. Configure the right parameter in the ListView by double-clicking on the **Text item**, then use then connect Parameter {1} up to **Confidence**.
@@ -482,7 +489,7 @@ To perform the logic needed we'll create a Nanoflow which will open up the camer
 
 <img src="readme-img/mx-build-logic-take-picture.jpg"/>
 
-7. Configure the parameters as follows:
+7. Double-Click on the **Detect Custom Labels** Activity box to Configure the parameters as follows:
     - Picture = $Picture
     - Show Confirmation Screen = false
     - Picture Quality = low
@@ -493,7 +500,16 @@ To perform the logic needed we'll create a Nanoflow which will open up the camer
 
 8. From the Toolbox drag the detect custom labels action and configure as follows:
     - ProjectARN = Your Rekognition ARN. 
-    Copy paste your Rekognition model and use single quotes. Example: 'arn:aws:rekognition:us-west-2:123456:project/awsworkshop-mendix-aicv/version/awsworkshop-mendix-aicv.2022-07-19T11.24.01/1658244241480'
+    Copy paste your Rekognition model.
+    
+    **Make sure to include single quotes when inserting a text/string value**
+
+Example:
+
+    ```
+    'arn:aws:rekognition:us-west-2:123456:project/awsworkshop-mendix-aicv/version/awsworkshop-mendix-aicv.2022-07-19T11.24.01/1658244241480'
+    ```
+
     - Image = $Picture
     - MaxResults = 10
     - MinConfidence = 0
@@ -511,9 +527,13 @@ To perform the logic needed we'll create a Nanoflow which will open up the camer
 10. Inside the loop drag a **Retrieve** action from the **Toolbox** to retrieve the **BoundingBox**.
 11. Connect up the retrieve action by double-clicking on the action, selecting **By association**, clicking **Select**, and selecting the **Bounding Box** association.
 
+
+<img src="readme-img/mx-logic-boundingbox-1.gif"/>
 <img src="readme-img/mx-build-logic-retrieve-action.jpg"/>
 
-12. Drag on a **Create** action from the **Toolbox** into the loop and draw a line from the bounding box to the "Create" action.
+
+
+12. Drag on a **Create Object** action from the **Toolbox** into the loop and draw a line from the bounding box to the "Create" action.
 
 <img src="readme-img/mx-build-logic-create-action.jpg"/>
 
