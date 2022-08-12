@@ -25,7 +25,8 @@ You can open an AWS Account and access AWS Free Tier Offers: [Learn more and Cre
       - [Evaluate](#evaluate)
       - [Use Model](#use-model)
   - [Mendix Setup](#mendix-setup)
-    - [Launch windows EC2 Instance with Mendix Studio Pro Installed](#launch-windows-ec2-instance-with-mendix-studio-pro-installed)
+    - [Windows Setup](#windows-setup)
+    - [Mac or Non-Windows Setup - Launch windows EC2 Instance with Mendix Studio Pro Installed](#mac-or-non-windows-setup---launch-windows-ec2-instance-with-mendix-studio-pro-installed)
     - [Download release from this repo](#download-release-from-this-repo)
   - [Setup your project](#setup-your-project)
   - [The Mendix Build](#the-mendix-build)
@@ -44,6 +45,9 @@ You can open an AWS Account and access AWS Free Tier Offers: [Learn more and Cre
   - [Amazon Rekogniton Clean up](#amazon-rekogniton-clean-up)
   - [Amazon S3 Clean up](#amazon-s3-clean-up)
   - [Amazon EC2 Clean up](#amazon-ec2-clean-up)
+- [Frequently Asked Questions (FAQ)](#frequently-asked-questions-faq)
+- [Troubleshooting](#troubleshooting)
+- [Your feedback](#your-feedback)
 
 ## AWS Build
 
@@ -227,11 +231,26 @@ After your model is trained, Amazon Rekognition Custom Labels provides the follo
 
 ## Mendix Setup
 
-We will be using Mendix Studio Pro to develop our app, which requires a Windows Operating system. If you don't have Windows installed, follow the below instructions
+We will be using Mendix Studio Pro to develop our app, which requires a Windows Operating system. If you don't have Windows installed, follow the below instructions for Launching a Windows machine on EC2
 
-### Launch windows EC2 Instance with Mendix Studio Pro Installed
+### Windows Setup
 
-We have published a Cloudformation Template that you can easily launch which is an EC2 Instance with an AMI that contains Mendix Studio Pro already installed.
+If you are using a Windows machine, all you will need to do is download & Install Mendix Studio Pro
+
+1. Download the latest Mendix Studio Pro from the [Marketplace](https://marketplace.mendix.com/link/studiopro/)
+2. Install this onto your machine (this will require some administrative privileges)
+
+<img src="readme-img/studio-install.gif">
+
+Now this is done, you can jump to [Download release from this repo](#download-release-from-this-repo)
+
+### Mac or Non-Windows Setup - Launch windows EC2 Instance with Mendix Studio Pro Installed
+
+We have published a Cloudformation Template that you can easily launch which is an EC2 Instance with an AMI that contains Mendix Studio Pro already installed. If you have Windows, you can skip to [Download release from this repo](#download-release-from-this-repo)
+
+**This is a temporary solution, Mendix Studio Pro will be released on Mac in the near future**
+
+**IMPORTANT: The region where you spin up the EC2 Instance can be different from where you create your Rekognition model**
 
 1. In order for the Cloudformation process to work you first need to create a EC2 Keypair. This can be created by searching for EC2 in the AWS Console, clicking on keypairs and creating a new one.
 
@@ -246,7 +265,7 @@ We have published a Cloudformation Template that you can easily launch which is 
 
 4. When you have the Key Pair you can launch the cloud formation template:
 
-[<img src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png">](https://console.aws.amazon.com/cloudformation/home?region=eu-central-1#/stacks/new?stackName=MendixStudioPro-Windows&templateURL=https://mendix-aws.s3.eu-central-1.amazonaws.com/windows_mendix_v2.json)
+[<img src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png">](https://console.aws.amazon.com/cloudformation/home?region=eu-central-1#/stacks/new?stackName=MendixStudioPro-Windows&templateURL=https://mendix-aws.s3.eu-central-1.amazonaws.com/cf1.json)
 
 5. In the cloudformation steps select the newly created keypair under the keyname option.
 
@@ -403,8 +422,8 @@ The first step with many Mendix projects is to start with building the data stru
 <img src="readme-img/mx-build-page-build-blocks.jpg"/>
 
 Now to give these widgets some data context, we will create a new instance of the Picture entity/object that we will use to:
-1) Take a picture with and store the image in
-2) Show the Label data that we receive from Rekognition that is associated with our picture (This is why we connected the Label and Picture Entity together in the Domain Model in our previous steps)
+1. Take a picture with and store the image in
+2. Show the Label data that we receive from Rekognition that is associated with our picture (This is why we connected the Label and Picture Entity together in the Domain Model in our previous steps)
 
 3. We need to tell the page the context object that we plan to work with (of type Picture) and for this we use a **Data View** and connect this up to our Picture object that we created in the Domain Model. Click on the **Widgets** tab on the right-hand side.
 4. Drag on a **Data view** widget onto the page at the top.
@@ -450,16 +469,16 @@ Our Nanoflow will allow us to create a new Picture context object to do what we 
 
 This Nanoflow is now complete, and we can move onto our next step
 
-1.  Open up the **Home_Start** page again.
-2.  Drag the entiere existing layout into the Dataview.
+20.  Open up the **Home_Start** page again.
+21.  Drag the entiere existing layout into the Dataview.
 
 <img src="readme-img/mx-build-layout-drag.gif"/>
 
-21. Double click on the Picture *control* and connect it to the Picture *entity*.
+22. Double click on the Picture *control* and connect it to the Picture *entity*.
 
 <img src="readme-img/mx-pic-cntrlp-toentity.png"/>
 
-22. Double click on the **List view**. Select **Data source** tab. Next to **Entity (path)** click **Select** and pick entity *Label*
+23. Double click on the **List view**. Select **Data source** tab. Next to **Entity (path)** click **Select** and pick entity *Label*
 
 <img src="readme-img/mx-build-page-listview-association.jpg"/>
 
@@ -467,14 +486,14 @@ This Nanoflow is now complete, and we can move onto our next step
 
 <img src="readme-img/mx-build-page-listview-autogenerate.jpg"/>
 
-23. Configure the left parameter in the ListView by double-clicking on the **Text item**, then use then connect Parameter {1} up to **Name**.
+24. Configure the left parameter in the ListView by double-clicking on the **Text item**, then use then connect Parameter {1} up to **Name**.
 Caption: {1}
 Parameter type: Attribute path
 Attribute path: MxRekogniitonDemo_Start.Label.Name
 mx-build-page-listview-autogenerate.jpg
 <img src="readme-img/mx-build-page-setting-labels.jpg"/>
 
-24. Configure the right parameter in the ListView by double-clicking on the **Text item**, then use then connect Parameter {1} up to **Confidence**.
+25. Configure the right parameter in the ListView by double-clicking on the **Text item**, then use then connect Parameter {1} up to **Confidence**.
 
 <img src="readme-img/mx-build-page-setting-labels-confidence.jpg"/>
 
@@ -604,67 +623,60 @@ You will need to do a few things:
 You will need a few things for this:
 1. Setup an MQTT thing in [IoT Core](https://docs.aws.amazon.com/iot/latest/developerguide/iot-moisture-create-thing.html#:~:text=In%20the%20AWS%20IoT%20console,choose%20Create%20a%20single%20thing.)
 
-
 2. Download the [project MPK](https://s3.eu-central-1.amazonaws.com/mendixdemo.com/aws/Mendix_AWS_IoT.mpk)
 
 You will be creating a whole new project for this using the steps above in [Setup your project](#setup-your-project)
 
-3. Turn on Dark Mode 
-
-<img src="readme-img/bonus1.jpg"/>
-
-<img src="readme-img/bonus2.jpg"/>
-
-4. To explore the Mendix Marketplace and download the MQTT Connector
+3. To explore the Mendix Marketplace and download the MQTT Connector
 
 <img src="readme-img/bonus1.png"/>
 
-5. Connect the MQTT Config page provided up to the **Navigation**  
+4. Connect the MQTT Config page provided up to the **Navigation**  
 
 <img src="readme-img/bonus3.png"/>
 
-6. Configure your MQTT using the device information you created in **IoT Core**
+5. Configure your MQTT using the device information you created in **IoT Core**
 
 <img src="readme-img/bonus4.jpg"/>
 
-7. Create an Entity in the Domain model that is NON-PERSISTENT Called **Comment** 
-8. Add an attribute to that entity that can store a String attribute **Message**
-9.  Create a DSO Nanoflow like we did in the Rekognition project that CREATES and RETURNS an instance of the **Comment** Entity
-10. Place a **Data View** on the **Home_IoT_Start** start page and select the new DSO (Data Source) Nanoflow as the data source
-11. Add a text box widget from the **Toolbox** that can help capture the message attribute
-12. Add a **Microflow** button inside the **Data View** in order to send the message
-13. Behind the Microflow button, create a new Microflowm to send the message
-14. In the Microflow, drag on a **Retrieve** activity from the **Toolbox** the IoT Config From the database
+6. Create an Entity in the Domain model that is NON-PERSISTENT Called **Comment** 
+7. Add an attribute to that entity that can store a String attribute **Message**
+8.  Create a DSO Nanoflow like we did in the Rekognition project that CREATES and RETURNS an instance of the **Comment** Entity
+9. Place a **Data View** on the **Home_IoT_Start** start page and select the new DSO (Data Source) Nanoflow as the data source
+10. Add a text box widget from the **Toolbox** that can help capture the message attribute
+11. Add a **Microflow** button inside the **Data View** in order to send the message
+12. Behind the Microflow button, create a new Microflowm to send the message
+13. In the Microflow, drag on a **Retrieve** activity from the **Toolbox** the IoT Config From the database
 
 <img src="readme-img/bonus5.jpg"/>
 
-15. Now drag on a **Export with mapping** activity from the **Toolbox**
-16. In this Export activity, Select a mapping, and click on **New** to create a new one
+14. Now drag on a **Export with mapping** activity from the **Toolbox**
+15. In this Export activity, Select a mapping, and click on **New** to create a new one
 
 <img src="readme-img/bonus6.jpg"/>
 
-17. Open the new mapping, click on **Select Elements** at the top
-18. Select **JSON Structure**
-19. Click **Select** and create a new JSON mapping
-20. Enter the following simple JSON structure
+16. Open the new mapping, click on **Select Elements** at the top
+17. Select **JSON Structure**
+18. Click **Select** and create a new JSON mapping
+19. Enter the following simple JSON structure
 
 ```
 {
 	"Message": "Hello World!"
 }
 ```
-21. Click Refresh and OK
-22. Inside the mapping you can automatically map your Mendix **Comment** Entity to the JSON structure by selecting, **Map Automatically** at the top
-23. Once the mapping is done, inside your Microflow, in the Export mapping activity, select your Comment object as a Paramenter and click OK
-24. Select the output for the export mapping to be a String
-25. Use the **Toolbox** to drag on the **Publish MQTT** activity
-26. Fill in the details of the MQTT, use the topic:
+20. Click Refresh and OK
+21. Inside the mapping you can automatically map your Mendix **Comment** Entity to the JSON structure by selecting, **Map Automatically** at the top
+22. Once the mapping is done, inside your Microflow, in the Export mapping activity, select your Comment object as a Paramenter and click OK
+23. Select the output for the export mapping to be a String
+24. Use the **Toolbox** to drag on the **Publish MQTT** activity
+25. Fill in the details of the MQTT, use the topic:
 ```
 things/comments
 ```
-27. Use the Output JSON String from the export as the **Payload**
-28. Select QoS as "At least once"
-29. Set Retained to true
+26. Use the Output JSON String from the export as the **Payload**
+27. Select QoS as "At least once"
+28. Set Retained to true
 
 Your Microflow should be complete, you can run the project locally by using the **Green** run button at the top (left of the publish button)
 
@@ -720,3 +732,15 @@ You should be able to log into the AWS IoT Core console, and subscribe to your t
 <img src="readme-img/cleanup-ec2-2.png"/>
 
 3. In the popup window, confirm **Terminate**
+
+# Frequently Asked Questions (FAQ)
+
+See our [FAQ](FAQ.md) section
+
+# Troubleshooting
+
+See our [Troubleshooting secion in the FAQ page](FAQ.md#feedback) section
+
+# Your feedback
+
+If you have a question that is NOT answered below, or if you have other feedback regarding the workshop, please feel free to get in touch with us [here](https://mendix.com)
