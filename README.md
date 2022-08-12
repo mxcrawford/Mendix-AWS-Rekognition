@@ -231,7 +231,7 @@ After your model is trained, Amazon Rekognition Custom Labels provides the follo
 
 ## Mendix Setup
 
-We will be using Mendix Studio Pro to develop our app, which requires a Windows Operating system. If you don't have Windows installed, follow the below instructions for Launching a Windows machine on EC2
+We will be using Mendix Studio Pro to develop our app, which requires a Windows Operating system. If you don't have Windows installed, follow the below instructions for [Launching a Windows machine on EC2](#mac-or-non-windows-setup---launch-windows-ec2-instance-with-mendix-studio-pro-installed)
 
 ### Windows Setup
 
