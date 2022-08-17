@@ -41,6 +41,11 @@ You can open an AWS Account and access AWS Free Tier Offers: [Learn more and Cre
   - [Change your app and use it to detect celebrity faces!](#change-your-app-and-use-it-to-detect-celebrity-faces)
 - [Bonus 2](#bonus-2)
   - [Publish messages using AWS IoT Core & MQTT](#publish-messages-using-aws-iot-core--mqtt)
+    - [Setup your IoT Core thing](#setup-your-iot-core-thing)
+    - [Build for Publishing messages](#build-for-publishing-messages)
+    - [Test your publishing](#test-your-publishing)
+    - [Build for Subscribe](#build-for-subscribe)
+    - [Test Subscribe](#test-subscribe)
 - [Clean up](#clean-up)
   - [Amazon Rekogniton Clean up](#amazon-rekogniton-clean-up)
   - [Amazon S3 Clean up](#amazon-s3-clean-up)
@@ -339,7 +344,7 @@ To keep it simple you can use stronger credentials, but in order to interact wit
             "Sid": "VisualEditor0",
             "Effect": "Allow",
             "Action": "rekognition:DetectCustomLabels",
-            "Resource": "arn:aws:rekognition:eu-central-1:<account id>:project/<project-name>/version/*/*"
+            "Resource": "arn:aws:rekognition:<INSERT_REGION>:<account id>:project/<project-name>/version/*/*"
         }
     ]
 }
@@ -620,20 +625,155 @@ You will need to do a few things:
 
 ## Publish messages using AWS IoT Core & MQTT
 
-You will need a few things for this:
-1. Setup an MQTT thing in [IoT Core](https://docs.aws.amazon.com/iot/latest/developerguide/iot-moisture-create-thing.html#:~:text=In%20the%20AWS%20IoT%20console,choose%20Create%20a%20single%20thing.)
+With Mendix you can also very easily connect your IoT devices using AWS's IoT Core, this set of steps will help you to publish and subscribe to IoT devices using the MQTT protocol
 
-2. Download the [project MPK](https://s3.eu-central-1.amazonaws.com/mendixdemo.com/aws/Mendix_AWS_IoT.mpk)
+### Setup your IoT Core thing
 
-You will be creating a whole new project for this using the steps above in [Setup your project](#setup-your-project)
+1. Setup an MQTT thing in [IoT Core](https://console.aws.amazon.com/iot/home)
 
-3. To explore the Mendix Marketplace and download the MQTT Connector
+<img src="readme-img/bonus-thing1.png"/>
 
-<img src="readme-img/bonus1.png"/>
+2. Select a Single thing
+   
+<img src="readme-img/bonus-thing2.png"/>
+
+1. Enter the name
+
+<img src="readme-img/bonus-thing3.png"/>
+
+2. We recommend "Auto-generate a new certificate"
+
+<img src="readme-img/bonus-thing4.png"/>
+
+3. Attach a policy
+
+We'll assume you do not have a Policy in place, so for this build you can just use an "Allow all" policy (This is to keep things simple but is NOT recommended for production)
+
+You can enter the Policy in JSON from as below:
+
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "iot:*",
+      "Resource": "*"
+    }
+  ]
+}
+```
+
+If you are wanting to use this in a more secure way, you can use the below format for your policy. See more about IoT Core Policies [here](https://docs.aws.amazon.com/iot/latest/developerguide/iot-policies.html)
+
+Make sure to replace **<INSERT_REGION>** with your region e.g. **eu-central-1**
+
+Make sure to replace **<INSERT_ACCOUNT_ID>** with your account id e.g. **999999999999**
+
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "iot:Connect",
+      "Resource": "arn:aws:iot:<INSERT_REGION>:<INSERT_ACCOUNT_ID>:*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "iot:Publish",
+      "Resource": "arn:aws:iot:<INSERT_REGION>:<INSERT_ACCOUNT_ID>:*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "iot:Receive",
+      "Resource": "arn:aws:iot:<INSERT_REGION>:<INSERT_ACCOUNT_ID>:*"
+    },
+    {
+      "Effect": "Deny",
+      "Action": "iot:GetRetainedMessage",
+      "Resource": "arn:aws:iot:<INSERT_REGION>:<INSERT_ACCOUNT_ID>:*"
+    },
+    {
+      "Effect": "Deny",
+      "Action": "iot:ListRetainedMessages",
+      "Resource": "arn:aws:iot:<INSERT_REGION>:<INSERT_ACCOUNT_ID>:*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "iot:RetainPublish",
+      "Resource": "arn:aws:iot:<INSERT_REGION>:<INSERT_ACCOUNT_ID>:*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "iot:Subscribe",
+      "Resource": "arn:aws:iot:<INSERT_REGION>:<INSERT_ACCOUNT_ID>:*"
+    },
+    {
+      "Effect": "Deny",
+      "Action": "iot:DeleteThingShadow",
+      "Resource": "arn:aws:iot:<INSERT_REGION>:<INSERT_ACCOUNT_ID>:*"
+    },
+    {
+      "Effect": "Deny",
+      "Action": "iot:GetThingShadow",
+      "Resource": "arn:aws:iot:<INSERT_REGION>:<INSERT_ACCOUNT_ID>:*"
+    },
+    {
+      "Effect": "Deny",
+      "Action": "iot:UpdateThingShadow",
+      "Resource": "arn:aws:iot:<INSERT_REGION>:<INSERT_ACCOUNT_ID>:*"
+    },
+    {
+      "Effect": "Deny",
+      "Action": "iot:UpdateThingShadow",
+      "Resource": "arn:aws:iot:<INSERT_REGION>:<INSERT_ACCOUNT_ID>:*"
+    },
+    {
+      "Effect": "Deny",
+      "Action": "iot:DescribeJobExecution",
+      "Resource": "arn:aws:iot:<INSERT_REGION>:<INSERT_ACCOUNT_ID>:*"
+    },
+    {
+      "Effect": "Deny",
+      "Action": "iot:GetPendingJobExecutions",
+      "Resource": "arn:aws:iot:<INSERT_REGION>:<INSERT_ACCOUNT_ID>:*"
+    },
+    {
+      "Effect": "Deny",
+      "Action": "iot:UpdateJobExecution",
+      "Resource": "arn:aws:iot:<INSERT_REGION>:<INSERT_ACCOUNT_ID>:*"
+    },
+    {
+      "Effect": "Deny",
+      "Action": "iot:StartNextPendingJobExecution",
+      "Resource": "arn:aws:iot:<INSERT_REGION>:<INSERT_ACCOUNT_ID>:*"
+    }
+  ]
+}
+```
+
+4. Create thing & Download Certs
+
+Your thing will now be created. **Make sure to download all of the required certificate & key files**
+
+<img src="readme-img/bonus-thing5-certs.png"/>
+
+### Build for Publishing messages
+
+1. To explore the Mendix Marketplace and download the MQTT Connector
+
+<img src="readme-img/mqtt1.gif"/>
 
 4. Connect the MQTT Config page provided up to the **Navigation**  
 
-<img src="readme-img/bonus3.png"/>
+The Navigation inside Mendix Studio Pro allows you to configure a Navigation/Menu system for your users inside the application
+
+<img src="readme-img/mqtt2.gif"/>
+
+You can now RUN your Mendix App using the Play icon
+
+<img src="readme-img/mqtt3.gif"/>
 
 5. Configure your MQTT using the device information you created in **IoT Core**
 
@@ -681,6 +821,14 @@ things/comments
 Your Microflow should be complete, you can run the project locally by using the **Green** run button at the top (left of the publish button)
 
 You should be able to log into the AWS IoT Core console, and subscribe to your topic to test the messages
+
+### Test your publishing
+
+### Build for Subscribe
+
+### Test Subscribe
+
+
 
 # Clean up
 
