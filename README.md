@@ -777,16 +777,39 @@ You can now RUN your Mendix App using the Play icon
 
 5. Configure your MQTT using the device information you created in **IoT Core**
 
+<img src="readme-img/mqtt_config1.gif"/>
+
+* Select a Name for your configuration (it can be anything)
+* Enter the Broker Host - in this case you can copy it from the AWS Console in the IoT Core configuration, see below:
+
+<img src="readme-img/mqtt_config1.gif"/>
+
+* Port: 8883
+* Authentication Method: NONE
+* Timeout: 30
+* Keep alive time: 60
+* Clean session: No
+* Auth reconnect: Yes
+* SSL: Enabled
+* Enter the respective certificates & keys from the files you have downloaded, see below:
+
+<img src="readme-img/mqtt4.gif"/>
+
+Final result:
 <img src="readme-img/bonus4.jpg"/>
 
-6. Create an Entity in the Domain model that is NON-PERSISTENT Called **Comment** 
-7. Add an attribute to that entity that can store a String attribute **Message**
-8.  Create a DSO Nanoflow like we did in the Rekognition project that CREATES and RETURNS an instance of the **Comment** Entity
-9. Place a **Data View** on the **Home_IoT_Start** start page and select the new DSO (Data Source) Nanoflow as the data source
-10. Add a text box widget from the **Toolbox** that can help capture the message attribute
-11. Add a **Microflow** button inside the **Data View** in order to send the message
-12. Behind the Microflow button, create a new Microflowm to send the message
-13. In the Microflow, drag on a **Retrieve** activity from the **Toolbox** the IoT Config From the database
+6. Test MQTT
+
+
+
+1. Create an Entity in the Domain model that is NON-PERSISTENT Called **Comment** 
+2. Add an attribute to that entity that can store a String attribute **Message**
+3.  Create a DSO Nanoflow like we did in the Rekognition project that CREATES and RETURNS an instance of the **Comment** Entity
+4. Place a **Data View** on the **Home_IoT_Start** start page and select the new DSO (Data Source) Nanoflow as the data source
+5.  Add a text box widget from the **Toolbox** that can help capture the message attribute
+6.  Add a **Microflow** button inside the **Data View** in order to send the message
+7.  Behind the Microflow button, create a new Microflowm to send the message
+8.  In the Microflow, drag on a **Retrieve** activity from the **Toolbox** the IoT Config From the database
 
 <img src="readme-img/bonus5.jpg"/>
 
