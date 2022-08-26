@@ -37,6 +37,7 @@ You can open an AWS Account and access AWS Free Tier Offers: [Learn more and Cre
     - [Building the domain model](#building-the-domain-model)
     - [Building the User Interface](#building-the-user-interface)
     - [Building the logic](#building-the-logic)
+- [Bonus](#bonus)
 - [Clean up](#clean-up)
   - [Amazon Rekogniton Clean up](#amazon-rekogniton-clean-up)
   - [Amazon S3 Clean up](#amazon-s3-clean-up)
@@ -599,6 +600,7 @@ Example:
 
 <img src="readme-img/end-result.jpg"/>
 
+# Bonus
 
 If you're streaking ahead, you can always try out the bonus activities
 
